@@ -1,0 +1,11 @@
+.square.light {
+    -fx-background-color: white;
+}
+
+.square.dark {
+    -fx-background-color: lightgrey;
+}
+
+.legal{
+    -fx-background-color: rgba(255, 229, 0, 0.72) !important;
+}
