@@ -36,7 +36,6 @@ public class GameController {
 
     private void printBoard(){
         isGameOver();
-        System.out.println(state);
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         colorChessBoard();
@@ -102,25 +101,29 @@ public class GameController {
     }
 
     private void drawKnight(){
-
         Position knightPos = state.getKnightPos();
-        System.out.println("IDE RAJZOLOM A HUSZART: "+ knightPos);
 
         ImageView knight = new ImageView("/theBodyguard/images/blackKnight.png");
         knight.setFitHeight(70);
         knight.setFitWidth(70);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
         board[knightPos.getRow()][knightPos.getCol()] = knight;
+
+        if(state.nextPlayer == State.KNIGHT){
+            Node knightNode = board[knightPos.getRow()][knightPos.getCol()];
+            knightNode.getStyleClass().add("nextPlayer");
+        }
     }
 
     private void drawKing(){
         Position KingPos = state.getKingPos();
-
         ImageView king = new ImageView("/theBodyguard/images/king.png");
         king.setFitHeight(70);
         king.setFitWidth(70);
         grid.add(king,KingPos.getCol(),KingPos.getRow());
         board[KingPos.getRow()][KingPos.getCol()] = king;
+
+
     }
 
     private void drawFinish(){
