@@ -1,14 +1,20 @@
 package lonelyKnight.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import lonelyKnight.state.GameState;
 import org.tinylog.Logger;
 import startApp.Position;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameController {
@@ -87,6 +93,14 @@ public class GameController {
         if(state.isOver()){
             Logger.error("VEGEEE");
         }
+    }
+
+    public void backToMenu(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 }

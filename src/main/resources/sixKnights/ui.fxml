@@ -33,6 +33,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="topLabel" alignment="CENTER" contentDisplay="TOP" prefHeight="72.0" prefWidth="376.0" text="Label" />
+            <Button mnemonicParsing="false" onAction="#backToMenu" text="Back To Main Menu" />
          </children></HBox>
    </top>
    <bottom>

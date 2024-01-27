@@ -2,14 +2,20 @@ package eightBishops.gui;
 
 import eightBishops.state.GameState;
 import eightBishops.state.State;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 import startApp.Position;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +45,7 @@ public class GameController {
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.WHITE) {
-                    ImageView whiteBishop = new ImageView("/eightBishops/images/whiteBishop.png");
+                    ImageView whiteBishop = new ImageView("/eightBishops/images/whiteBishop2.png");
                     whiteBishop.setFitHeight(100);
                     whiteBishop.setFitWidth(100);
                     if(state.nextPlayer == State.WHITE) {
@@ -48,7 +54,7 @@ public class GameController {
                     grid.add(whiteBishop,col,row);
                     board[row][col] = whiteBishop;
                 } else if (state.board[row][col] == State.BLACK) {
-                    ImageView blackBishop = new ImageView("/eightBishops/images/blackBishop.png");
+                    ImageView blackBishop = new ImageView("/eightBishops/images/blackBishop2.png");
                     blackBishop.setFitHeight(100);
                     blackBishop.setFitWidth(100);
                     if(state.nextPlayer == State.BLACK) {
@@ -132,5 +138,13 @@ public class GameController {
         }
         return false;
     }
+    public void backToMenu(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 }

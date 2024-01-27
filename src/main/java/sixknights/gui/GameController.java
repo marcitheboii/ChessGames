@@ -1,18 +1,24 @@
 package sixknights.gui;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 import sixknights.state.sixKnightsGameState;
 import startApp.Position;
 import sixknights.state.State;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,5 +184,13 @@ public class GameController {
             return true;
         }
         return false;
+    }
+
+    public void backToMenu(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
