@@ -1,4 +1,4 @@
-package sixknights.state;
+package startApp;
 
 public class Position {
     /**

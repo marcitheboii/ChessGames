@@ -1,13 +1,13 @@
-package sixknights.gui;
-
-import java.io.IOException;
-import java.util.Objects;
+package startApp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class GameApplication extends Application {
 
@@ -19,8 +19,8 @@ public class GameApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ui.fxml")));
-        stage.setTitle("Six Knights Problem");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/landingPage/ui.fxml")));
+        stage.setTitle("Interactive Logic Games");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

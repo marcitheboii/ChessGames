@@ -1,0 +1,7 @@
+.dashboard-navbar-wrapper{
+    -fx-background-color: grey;
+}
+.dashboard-navbar-button{
+    -fx-pref-width: 120px;
+    -fx-pref-height: 80px;
+}

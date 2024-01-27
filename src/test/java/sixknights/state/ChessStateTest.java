@@ -1,5 +1,6 @@
 package sixknights.state;
 
+import startApp.Position;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChessStateTest {
     @Test
     void setStartBoard() {
-        ChessState randomState = new ChessState(
+        sixKnightsGameState randomState = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -19,7 +20,7 @@ class ChessStateTest {
                 new Position(3,1),
                 State.BLACK);
         randomState.setStartBoard();
-        ChessState startPositionManual = new ChessState(
+        sixKnightsGameState startPositionManual = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(0,1),
                 new Position(0,2),
@@ -36,7 +37,7 @@ class ChessStateTest {
 
     @Test
     void goalTest() {
-        ChessState goalState = new ChessState(
+        sixKnightsGameState goalState = new sixKnightsGameState(
                 new Position(3,0),
                 new Position(3,1),
                 new Position(3,2),
@@ -45,7 +46,7 @@ class ChessStateTest {
                 new Position(0,1),
                 new Position(0,2),
                 State.BLACK);
-        ChessState  state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
         assertFalse(state.goalTest());
         assertTrue(goalState.goalTest());
 
@@ -53,9 +54,9 @@ class ChessStateTest {
 
     @Test
     void movePiece() {
-        ChessState state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
         state.movePiece(new Position(0,0),new Position(2,1));
-        ChessState expectedState = new ChessState(
+        sixKnightsGameState expectedState = new sixKnightsGameState(
                 new Position(2,1),
                 new Position(0,1),
                 new Position(0,2),
@@ -67,9 +68,9 @@ class ChessStateTest {
         expectedState.calculateBoard();
         assertEquals(expectedState,state);
 
-        ChessState state1 = new ChessState();
+        sixKnightsGameState state1 = new sixKnightsGameState();
         state1.movePiece(new Position(3,0),new Position(1,1));
-        ChessState expectedState2 = new ChessState(
+        sixKnightsGameState expectedState2 = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(0,1),
                 new Position(0,2),
@@ -84,7 +85,7 @@ class ChessStateTest {
 
     @Test
     void changeNextPlayer() {
-        ChessState state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
         state.changeNextPlayer();
         assertEquals(State.BLACK,state.nextPlayer);
         state.changeNextPlayer();
@@ -95,7 +96,7 @@ class ChessStateTest {
 
     @Test
     void prepBoardForCalculation() {
-        ChessState expectedState = new ChessState();
+        sixKnightsGameState expectedState = new sixKnightsGameState();
         for(int row = 0;row < expectedState.rowBorder;row ++){
             for(int col = 0;col < expectedState.colBorder;col++){
                 expectedState.board[row][col] = State.SAFE;
@@ -110,7 +111,7 @@ class ChessStateTest {
         expectedState.board[3][1] = State.WHITE;
         expectedState.board[3][2] = State.WHITE;
 
-        ChessState testState = new ChessState(
+        sixKnightsGameState testState = new sixKnightsGameState(
                 new Position(2,1),
                 new Position(0,1),
                 new Position(0,2),
@@ -139,7 +140,7 @@ class ChessStateTest {
 
     @Test
     void isOnBoard() {
-        ChessState state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
 
         Position x = new Position(0,0);
         assertTrue(state.isOnBoard(x));
@@ -159,7 +160,7 @@ class ChessStateTest {
 
     @Test
     void allMovesArray() {
-        ChessState state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
         ArrayList<Position> pos = new ArrayList<>();
         pos.add(new Position(2,1));
         pos.add(new Position(1,2));
@@ -174,7 +175,7 @@ class ChessStateTest {
 
     @Test
     void legalMovesArray() {
-        ChessState randomState = new ChessState(
+        sixKnightsGameState randomState = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -195,13 +196,13 @@ class ChessStateTest {
 
     @Test
     void testToString() {
-        ChessState state = new ChessState();
+        sixKnightsGameState state = new sixKnightsGameState();
         assertEquals("\nBLACK BLACK BLACK \nDEAD WHITE_HIT DEAD \nDEAD BLACK_HIT DEAD \nWHITE WHITE WHITE \n",state.toString());
     }
 
     @Test
     void equals(){
-        ChessState randomState = new ChessState(
+        sixKnightsGameState randomState = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -210,7 +211,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.BLACK);
-        ChessState randomState2 = new ChessState(
+        sixKnightsGameState randomState2 = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -219,7 +220,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.BLACK);
-        ChessState randomState3 = new ChessState(
+        sixKnightsGameState randomState3 = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -228,7 +229,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.WHITE);
-        ChessState randomState4 = new ChessState(
+        sixKnightsGameState randomState4 = new sixKnightsGameState(
                 new Position(0,0),
                 new Position(0,2),
                 new Position(0,2),

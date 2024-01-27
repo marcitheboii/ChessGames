@@ -1,11 +1,13 @@
 package sixknights.state;
 
+import startApp.Position;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static sixknights.state.State.*;
 
-public class ChessState {
+public class sixKnightsGameState {
 
     /**
      *  A sakktábla sorainak száma.
@@ -30,7 +32,7 @@ public class ChessState {
     /**
      *  Argumentum nélküli konstruktor.
      */
-    public ChessState(){
+    public sixKnightsGameState(){
         this.board = new State[rowBorder][colBorder];
         this.nextPlayer = WHITE;
 
@@ -48,7 +50,7 @@ public class ChessState {
      * @param w3 harmadik fehér huszár
      * @param color játékban következő oldal
      */
-    public ChessState(Position b1,Position b2,Position b3,Position w1,Position w2,Position w3, State color){
+    public sixKnightsGameState(Position b1, Position b2, Position b3, Position w1, Position w2, Position w3, State color){
         this.board = new State[rowBorder][colBorder];
         this.nextPlayer = color;
 
@@ -267,7 +269,7 @@ public class ChessState {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ChessState state)) return false;
+        if (!(o instanceof sixKnightsGameState state)) return false;
         return Arrays.deepEquals(board, state.board) && nextPlayer == state.nextPlayer;
     }
 }

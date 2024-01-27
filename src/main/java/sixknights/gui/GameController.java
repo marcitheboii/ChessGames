@@ -9,8 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import org.tinylog.Logger;
-import sixknights.state.ChessState;
-import sixknights.state.Position;
+import sixknights.state.sixKnightsGameState;
+import startApp.Position;
 import sixknights.state.State;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class GameController {
     private GridPane grid;
     @FXML
     private Label topLabel;
-    private final ChessState state = new ChessState();
+    private final sixKnightsGameState state = new sixKnightsGameState();
     private Position selected;
     private Node[][] board;
     private final List<Node> validNodes = new ArrayList<>();
@@ -39,12 +39,13 @@ public class GameController {
      * A játéktáblát benépesítő függvény, újrarajzolja az eltárolt állapot alapján a huszárok helyét.
      */
     private void printBoard(){
+
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.WHITE) {
-                    ImageView white_k = new ImageView("/images/white_knight.png");
+                    ImageView white_k = new ImageView("/sixKnights/images/white_knight.png");
                     white_k.setFitHeight(120);
                     white_k.setFitWidth(120);
                     if(state.nextPlayer == State.WHITE) {
@@ -53,7 +54,7 @@ public class GameController {
                     grid.add(white_k,col,row);
                     board[row][col] = white_k;
                 } else if (state.board[row][col] == State.BLACK) {
-                    ImageView black_k = new ImageView("/images/black_knight.png");
+                    ImageView black_k = new ImageView("/sixKnights/images/black_knight.png");
                     black_k.setFitHeight(120);
                     black_k.setFitWidth(120);
                     if(state.nextPlayer == State.BLACK) {
@@ -91,7 +92,6 @@ public class GameController {
             validNodes.add(validNode);
             validNode.getStyleClass().add("legal");
             validNode.setOnMouseClicked(this::moveOnClick);
-
         }
     }
 
@@ -149,7 +149,7 @@ public class GameController {
                 Logger.trace("Goal state reached!");
             }else {
                 Platform.runLater(() -> topLabel.setText(String.format("Next side : " + state.nextPlayer)));
-                Logger.trace("Next side :" + state.nextPlayer);
+                Logger.trace("Next side: " + state.nextPlayer);
             }
 
         }
