@@ -14,9 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
+import sixknights.state.State;
 import sixknights.state.sixKnightsGameState;
 import startApp.Position;
-import sixknights.state.State;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +32,9 @@ public class GameController {
     private Position selected;
     private Node[][] board;
     private final List<Node> validNodes = new ArrayList<>();
+
+    private static final int nodeHeight = 140;
+    private static final int nodeWidth = 140;
 
     /**
      *  Fxml által meghívásra kerülő kezdő függvény.
@@ -50,35 +53,49 @@ public class GameController {
 
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
+                var square = new StackPane();
+                square.getStyleClass().add("square");
+                square.getStyleClass().add((row + col) % 2 == 0 ? "light": "dark");
+                grid.add(square, col, row);
+                board[row][col] = square;
+
                 if(state.board[row][col] == State.WHITE) {
-                    ImageView white_k = new ImageView("/sixKnights/images/white_knight.png");
-                    white_k.setFitHeight(120);
-                    white_k.setFitWidth(120);
-                    if(state.nextPlayer == State.WHITE) {
-                        white_k.setOnMouseClicked(this::selectClick);
-                    }
-                    grid.add(white_k,col,row);
-                    board[row][col] = white_k;
+                    addWhiteKnight(row,col);
                 } else if (state.board[row][col] == State.BLACK) {
-                    ImageView black_k = new ImageView("/sixKnights/images/black_knight.png");
-                    black_k.setFitHeight(120);
-                    black_k.setFitWidth(120);
-                    if(state.nextPlayer == State.BLACK) {
-                        black_k.setOnMouseClicked(this::selectClick);
-                    }
-                    grid.add(black_k,col,row);
-                    board[row][col] = black_k;
-                }else {
-                    var square = new StackPane();
-                    square.getStyleClass().add("square");
-                    square.getStyleClass().add((row + col) % 2 == 0 ? "light": "dark");
-                    grid.add(square, col, row);
-                    board[row][col] = square;
+                    addBlackKnight(row,col);
                 }
             }
         }
         Logger.info("Board printed");
         labelHandler();
+    }
+
+    private void addWhiteKnight(int row, int col){
+        Node whiteBishopNode = board[row][col];
+        ImageView white_k = new ImageView("/sixKnights/images/whiteKnight.png");
+        white_k.setFitHeight(nodeHeight);
+        white_k.setFitWidth(nodeWidth);
+        if(state.nextPlayer == State.WHITE) {
+            whiteBishopNode.getStyleClass().add("nextPlayer");
+            white_k.setOnMouseClicked(this::selectClick);
+            whiteBishopNode.setOnMouseClicked(this::selectClick);
+        }
+        grid.add(white_k,col,row);
+        board[row][col] = white_k;
+    }
+
+    private void addBlackKnight(int row, int col){
+        Node blackBishopNode = board[row][col];
+        ImageView black_k = new ImageView("/sixKnights/images/blackKnight.png");
+        black_k.setFitHeight(nodeHeight);
+        black_k.setFitWidth(nodeWidth);
+        if(state.nextPlayer == State.BLACK) {
+            blackBishopNode.getStyleClass().add("nextPlayer");
+            black_k.setOnMouseClicked(this::selectClick);
+            blackBishopNode.setOnMouseClicked(this::selectClick);
+        }
+        grid.add(black_k,col,row);
+        board[row][col] = black_k;
     }
 
     /**
@@ -181,6 +198,7 @@ public class GameController {
         }
         if(counter == 3){
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
+            grid.setDisable(true);
             return true;
         }
         return false;

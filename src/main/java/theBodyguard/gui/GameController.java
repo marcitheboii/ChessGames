@@ -106,7 +106,7 @@ public class GameController {
         Position knightPos = state.getKnightPos();
         System.out.println("IDE RAJZOLOM A HUSZART: "+ knightPos);
 
-        ImageView knight = new ImageView("/theBodyguard/images/knight.png");
+        ImageView knight = new ImageView("/theBodyguard/images/blackKnight.png");
         knight.setFitHeight(70);
         knight.setFitWidth(70);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
@@ -148,6 +148,7 @@ public class GameController {
     private boolean isGameOver(){
 
         if(state.isOver()){
+            grid.setDisable(true);
             Logger.error("GAME OVER!");
             return  true;
         }

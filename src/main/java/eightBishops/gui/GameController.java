@@ -45,27 +45,41 @@ public class GameController {
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.WHITE) {
-                    ImageView whiteBishop = new ImageView("/eightBishops/images/whiteBishop2.png");
-                    whiteBishop.setFitHeight(100);
-                    whiteBishop.setFitWidth(100);
-                    if(state.nextPlayer == State.WHITE) {
-                        whiteBishop.setOnMouseClicked(this::selectClick);
-                    }
-                    grid.add(whiteBishop,col,row);
-                    board[row][col] = whiteBishop;
+                    addWhiteBishop(row,col);
                 } else if (state.board[row][col] == State.BLACK) {
-                    ImageView blackBishop = new ImageView("/eightBishops/images/blackBishop2.png");
-                    blackBishop.setFitHeight(100);
-                    blackBishop.setFitWidth(100);
-                    if(state.nextPlayer == State.BLACK) {
-                        blackBishop.setOnMouseClicked(this::selectClick);
-                    }
-                    grid.add(blackBishop,col,row);
-                    board[row][col] = blackBishop;
+                    addBlackBishop(row,col);
                 }
             }
         }
 
+    }
+
+    private void addWhiteBishop(int row,int col){
+        Node whiteBishopNode = board[row][col];
+        ImageView whiteBishop = new ImageView("/eightBishops/images/whiteBishop2.png");
+        whiteBishop.setFitHeight(100);
+        whiteBishop.setFitWidth(100);
+        if(state.nextPlayer == State.WHITE) {
+            whiteBishopNode.getStyleClass().add("nextPlayer");
+            whiteBishop.setOnMouseClicked(this::selectClick);
+            whiteBishopNode.setOnMouseClicked(this::selectClick);
+        }
+        grid.add(whiteBishop,col,row);
+        board[row][col] = whiteBishop;
+    }
+
+    private void addBlackBishop(int row, int col){
+        Node blackBishopNode = board[row][col];
+        ImageView blackBishop = new ImageView("/eightBishops/images/blackBishop2.png");
+        blackBishop.setFitHeight(100);
+        blackBishop.setFitWidth(100);
+        if(state.nextPlayer == State.BLACK) {
+            blackBishopNode.getStyleClass().add("nextPlayer");
+            blackBishop.setOnMouseClicked(this::selectClick);
+            blackBishopNode.setOnMouseClicked(this::selectClick);
+        }
+        grid.add(blackBishop,col,row);
+        board[row][col] = blackBishop;
     }
 
     private void moveOnClick(javafx.scene.input.MouseEvent event){
@@ -133,6 +147,7 @@ public class GameController {
             }
         }
         if(counter == 3){
+            grid.setDisable(true);
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
             return true;
         }

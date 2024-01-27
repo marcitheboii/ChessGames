@@ -22,6 +22,8 @@ public class GameController {
     @FXML
     private GridPane grid;
 
+    private Node[][] board;
+
     private final GameState state = new GameState();
 
     @FXML
@@ -30,6 +32,8 @@ public class GameController {
     }
 
     private void printBoard(){
+
+        board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         colorChessBoard();
         styleLegalFields();
@@ -54,7 +58,7 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/lonelyKnight/images/black_knight.png");
+        ImageView knight = new ImageView("/lonelyKnight/images/whiteKnight.png");
         knight.setFitHeight(70);
         knight.setFitWidth(70);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
@@ -73,11 +77,33 @@ public class GameController {
 
     private void setFinish(){
         ImageView finish = new ImageView("/lonelyKnight/images/finish.png");
-        finish.setFitHeight(70);
-        finish.setFitWidth(70);
+        finish.setFitHeight(responsiveSize("height"));
+        finish.setFitWidth(responsiveSize("width"));
         finish.setOnMouseClicked(this::moveKnight);
         grid.add(finish,state.colBorder-1,state.rowBorder-1);
     }
+
+    private int responsiveSize(String whatToCalc){
+
+        int defVal = 75;
+
+        if(whatToCalc.equals("width")){
+            if(grid.getWidth() == 0){
+                return defVal;
+            }
+            return (int)grid.getWidth()/grid.getRowCount();
+        }
+
+        if (whatToCalc.equals("height")) {
+            if(grid.getHeight() == 0){
+                return defVal;
+            }
+            return (int)grid.getHeight()/grid.getColumnCount();
+        }
+
+        return defVal;
+    }
+
 
     private void moveKnight(javafx.scene.input.MouseEvent event){
         var source = (Node)event.getSource();
@@ -91,6 +117,7 @@ public class GameController {
 
     private void isGameOver(){
         if(state.isOver()){
+            grid.setDisable(true);
             Logger.error("VEGEEE");
         }
     }

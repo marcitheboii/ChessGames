@@ -10,18 +10,6 @@
     -fx-background-color: rgba(255, 229, 0, 0.72) !important;
 }
 
-.square.black_hit{
-    -fx-background-color: black;
-}
-
-.square.white_hit{
-    -fx-background-color: white;
-}
-
-.square.dead{
-    -fx-background-color: red !important;
-}
-
-.square.safe{
-    -fx-background-color: blue ;
+.nextPlayer{
+    -fx-background-color: rgba(77, 180, 54, 0.1) !important;
 }

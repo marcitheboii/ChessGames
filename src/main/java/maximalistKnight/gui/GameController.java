@@ -47,8 +47,8 @@ public class GameController {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.HAS_BEEN){
                     ImageView has_been = new ImageView("/maximalistKnight/images/has_been.png");
-                    has_been.setFitHeight(100);
-                    has_been.setFitWidth(100);
+                    has_been.setFitHeight(responsiveSize("height")-30);
+                    has_been.setFitWidth(responsiveSize("width")-30);
                     grid.add(has_been, col, row);
                     board[row][col] = has_been;
                 }
@@ -71,9 +71,9 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/maximalistKnight/images/black_knight.png");
-        knight.setFitHeight(100);
-        knight.setFitWidth(100);
+        ImageView knight = new ImageView("/maximalistKnight/images/blackKnight.png");
+        knight.setFitHeight(responsiveSize("height"));
+        knight.setFitWidth(responsiveSize("size"));
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
         board[knightPos.getRow()][knightPos.getCol()] = knight;
     }
@@ -108,9 +108,11 @@ public class GameController {
             case 0:
                 break;
             case 1:
+                grid.setDisable(true);
                 Logger.error("GAME OVER, YOU LOST");
                 break;
             case 2:
+                grid.setDisable(true);
                 Logger.error("GAME OVER, YOU WIN");
                 break;
         }
@@ -122,6 +124,27 @@ public class GameController {
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    private int responsiveSize(String whatToCalc){
+
+        int defVal = 100;
+
+        if(whatToCalc.equals("width")){
+            if(grid.getWidth() == 0){
+                return defVal;
+            }
+            return (int)grid.getWidth()/grid.getRowCount();
+        }
+
+        if (whatToCalc.equals("height")) {
+            if(grid.getHeight() == 0){
+                return defVal;
+            }
+            return (int)grid.getHeight()/grid.getColumnCount();
+        }
+
+        return defVal;
     }
 
 }
