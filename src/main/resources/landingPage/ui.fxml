@@ -29,40 +29,82 @@
          <children>
             <HBox alignment="CENTER" prefHeight="107.0" prefWidth="800.0" VBox.vgrow="SOMETIMES">
                <children>
-                  <ImageView fx:id="lonelyKnightImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="lonelyKnightImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Lonely Knight">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="maximalistKnightImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="maximalistKnightImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Maximalis Knight">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="eightBishopsImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="eightBishopsImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Eight Bishops">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
+                  </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                <children>
-                  <ImageView fx:id="sixKnightsImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="sixKnightsImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Six Knights">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="bodyGuardImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="bodyGuardImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Body Guard">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="tightGameImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <ImageView fx:id="tightGameImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="63.0" prefWidth="163.0" text="Tight Game">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                           </font></Label>
+                     </children>
                      <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
-                  </ImageView>
+                  </VBox>
                </children>
             </HBox>
          </children>
