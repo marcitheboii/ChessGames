@@ -1,4 +1,8 @@
 package tightGame.state;
 
-public class State {
+public enum State {
+    KING,
+    BISHOP,
+    ROOK,
+    EMPTY,
 }

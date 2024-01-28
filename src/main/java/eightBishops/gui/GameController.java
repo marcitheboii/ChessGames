@@ -106,6 +106,7 @@ public class GameController {
             validNode.getStyleClass().add("legal");
             validNode.setOnMouseClicked(this::moveOnClick);
         }
+        System.out.println(state);
     }
 
     private void clearValidNodes() {
@@ -146,7 +147,7 @@ public class GameController {
                     counter++;
             }
         }
-        if(counter == 3){
+        if(counter == 4){
             grid.setDisable(true);
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
             return true;

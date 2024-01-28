@@ -1,0 +1,15 @@
+.square.light {
+    -fx-background-color: white;
+}
+
+.square.dark {
+    -fx-background-color: lightgrey;
+}
+
+.legal{
+    -fx-background-color: rgba(255, 229, 0, 1) !important;
+}
+
+.nextPlayer{
+    -fx-background-color: rgba(77, 180, 54, 0.1) !important;
+}

@@ -189,7 +189,6 @@ public class GameState {
             }
             board[position.getRow()][position.getCol()] = State.KNIGHT_HIT;
         }
-        System.out.println("OSSZES LEHETSEGES KING MOOVE: "+allKingMovesOnBoard(getKingPos()));
 
         for (Position pos : allKingMovesOnBoard(getKingPos())) {
             if (board[pos.getRow()][pos.getCol()] == State.KNIGHT_HIT || board[pos.getRow()][pos.getCol()] == State.FINISH) {

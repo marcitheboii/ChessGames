@@ -15,13 +15,13 @@
    <center>
       <GridPane fx:id="grid" gridLinesVisible="true" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints percentWidth="50" />
-            <ColumnConstraints percentWidth="50" />
-            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints halignment="CENTER" percentWidth="50" />
+            <ColumnConstraints halignment="CENTER" percentWidth="50" />
+            <ColumnConstraints halignment="CENTER" percentWidth="50" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="50" />
-          <RowConstraints percentHeight="50" />
+          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="50" valignment="CENTER" />
+          <RowConstraints percentHeight="50" valignment="CENTER" />
         </rowConstraints>
       </GridPane>
    </center>
