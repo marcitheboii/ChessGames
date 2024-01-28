@@ -9,6 +9,11 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <Button mnemonicParsing="false" onAction="#resetGame" text="Reset Game">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </Button>
             <Button mnemonicParsing="false" onAction="#backToMenu" text="Back To Main Menu">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

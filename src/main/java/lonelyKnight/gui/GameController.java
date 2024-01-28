@@ -24,14 +24,20 @@ public class GameController {
 
     private Node[][] board;
 
-    private final GameState state = new GameState();
+    private GameState state = new GameState();
 
     @FXML
     private void initialize(){
+        state = new GameState();
         printBoard();
+    }
+    public void resetGame(){
+        grid.setDisable(false);
+        initialize();
     }
 
     private void printBoard(){
+        grid.getChildren().clear();
 
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 

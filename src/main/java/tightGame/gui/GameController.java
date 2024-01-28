@@ -21,7 +21,7 @@ public class GameController {
     @FXML
     private GridPane grid;
 
-    private final GameState state = new GameState();
+    private GameState state = new GameState();
 
     private Node[][] board;
 
@@ -29,10 +29,17 @@ public class GameController {
 
     @FXML
     private void initialize(){
+        state = new GameState();
         printBoard();
     }
 
+    public void resetGame(){
+        grid.setDisable(false);
+        initialize();
+    }
+
     private void printBoard(){
+        grid.getChildren().clear();
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         colorChessBoard();
@@ -104,8 +111,6 @@ public class GameController {
         var source = (Node)event.getSource();
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
-
-        System.out.println(grid.getChildren());
 
         selected = new Position(row,col);
         Position legitMove = state.showMovesForSelected(selected);

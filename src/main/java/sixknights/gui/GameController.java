@@ -28,7 +28,7 @@ public class GameController {
     private GridPane grid;
     @FXML
     private Label topLabel;
-    private final sixKnightsGameState state = new sixKnightsGameState();
+    private sixKnightsGameState state = new sixKnightsGameState();
     private Position selected;
     private Node[][] board;
     private final List<Node> validNodes = new ArrayList<>();
@@ -41,13 +41,20 @@ public class GameController {
      */
     @FXML
     private void initialize(){
+        state = new sixKnightsGameState();
         printBoard();
+    }
+
+    public void resetGame(){
+        grid.setDisable(false);
+        initialize();
     }
 
     /**
      * A játéktáblát benépesítő függvény, újrarajzolja az eltárolt állapot alapján a huszárok helyét.
      */
     private void printBoard(){
+        grid.getChildren().clear();
 
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 

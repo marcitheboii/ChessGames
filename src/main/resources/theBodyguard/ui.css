@@ -7,7 +7,7 @@
 }
 
 .legal{
-    -fx-background-color: rgba(255, 229, 0, 1) !important;
+    -fx-background-color: rgba(255, 229, 0, 0.5) !important;
 }
 .nextPlayer{
     -fx-background-color: rgba(77, 180, 54, 0.1) !important;

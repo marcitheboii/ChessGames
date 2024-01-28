@@ -25,7 +25,7 @@ public class GameController {
     @FXML
     private GridPane grid;
 
-    private final GameState state = new GameState();
+    private GameState state = new GameState();
 
     private Node[][] board;
 
@@ -34,10 +34,16 @@ public class GameController {
 
     @FXML
     private void initialize(){
+        state = new GameState();
         printBoard();
+    }
+    public void resetGame(){
+        grid.setDisable(false);
+        initialize();
     }
 
     private void printBoard(){
+        grid.getChildren().clear();
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         colorChessBoard();
@@ -161,6 +167,4 @@ public class GameController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-
 }

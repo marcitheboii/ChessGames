@@ -31,7 +31,6 @@ public class LandingPageController {
 
     @FXML
     private void initialize(){
-
     }
 
     public void handleGoToLonelyKnight(final ActionEvent actionEvent) throws IOException {
