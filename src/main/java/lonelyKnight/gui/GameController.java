@@ -69,7 +69,6 @@ public class GameController {
             return;
         }
         ArrayList<Position> allMoves = state.allMovesArray();
-        System.out.println(allMoves);
 
         for (var pos : allMoves){
             var square = new StackPane();
