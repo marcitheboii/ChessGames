@@ -112,7 +112,6 @@ public class GameController {
             validNode.getStyleClass().add("legal");
             validNode.setOnMouseClicked(this::moveOnClick);
         }
-        System.out.println(state);
     }
 
     private void clearValidNodes() {

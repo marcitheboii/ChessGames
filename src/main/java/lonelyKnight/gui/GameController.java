@@ -65,6 +65,9 @@ public class GameController {
     }
 
     private void styleLegalFields(){
+        if(state.isOver()){
+            return;
+        }
         ArrayList<Position> allMoves = state.allMovesArray();
         System.out.println(allMoves);
 

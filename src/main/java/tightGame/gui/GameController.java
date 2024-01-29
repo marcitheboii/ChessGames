@@ -33,6 +33,9 @@ public class GameController {
         printBoard();
     }
 
+    private Node lastSelected;
+    private Node lastValid;
+
     public void resetGame(){
         grid.setDisable(false);
         initialize();
@@ -107,22 +110,37 @@ public class GameController {
     }
 
     private void selectClick(javafx.scene.input.MouseEvent event){
+        printBoard();
 
         var source = (Node)event.getSource();
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
-
         selected = new Position(row,col);
+
+        manageSelectedPlayer();
+
         Position legitMove = state.showMovesForSelected(selected);
         if (legitMove == null){
             return;
         }
         setValidNode(legitMove);
     }
+
+    private void manageSelectedPlayer(){
+        grid.getChildren().remove(lastSelected);
+        Node next = new StackPane();
+        next.setId("next");
+        next.getStyleClass().add("nextPlayer");
+        lastSelected = next;
+        grid.add(next,selected.getCol(),selected.getRow());
+    }
+
     private void setValidNode(Position legitMove){
+        grid.getChildren().remove(lastValid);
         Node validNode = board[legitMove.getRow()][legitMove.getCol()];
         validNode.getStyleClass().add("legal");
         validNode.setOnMouseClicked(this::moveOnClick);
+        lastValid = validNode;
 
     }
 

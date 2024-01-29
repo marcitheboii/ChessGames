@@ -18,16 +18,12 @@ import theBodyguard.state.State;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameController {
     @FXML
     private GridPane grid;
 
     private GameState state = new GameState();
-
-    private Node[][] board;
-    private final List<Node> validNodes = new ArrayList<>();
 
     @FXML
     private void initialize(){
@@ -43,7 +39,6 @@ public class GameController {
     private void printBoard(){
         grid.getChildren().clear();
         isGameOver();
-        board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
         colorChessBoard();
         drawFinish();
@@ -56,31 +51,43 @@ public class GameController {
             drawLegalMovesForKing();
         }
     }
-
-    private void drawLegalMovesForKnight(){
-        clearValidNodes();
+    private void drawLegalMovesForKnight() {
+        if (state.isOver()) {
+            return;
+        }else {
+            Position knight = state.getKnightPos();
+            StackPane next = new StackPane();
+            next.getStyleClass().add("nextPlayer");
+            grid.add(next,knight.getCol(),knight.getRow());
+        }
         ArrayList<Position> legitMoves = state.legitKnightMoves();
-        for (var pos : legitMoves){
-            Node validNode = board[pos.getRow()][pos.getCol()];
-            validNodes.add(validNode);
-            validNode.getStyleClass().add("legal");
-            validNode.setOnMouseClicked(this::moveKnight);
+        for (var pos : legitMoves) {
+            StackPane overlayPane = new StackPane();
+            overlayPane.getStyleClass().add("legal");
+            overlayPane.setOnMouseClicked(this::moveKnight);
+            grid.add(overlayPane, pos.getCol(), pos.getRow());
         }
     }
 
-    private void drawLegalMovesForKing(){
-        clearValidNodes();
+    private void drawLegalMovesForKing() {
+        if (state.isOver()) {
+            return;
+        }else {
+            Position knight = state.getKingPos();
+            StackPane next = new StackPane();
+            next.getStyleClass().add("nextPlayer");
+            grid.add(next,knight.getCol(),knight.getRow());
+        }
         ArrayList<Position> legitMoves = state.legitKingMoves();
-        for (var pos : legitMoves){
-            Node validNode = board[pos.getRow()][pos.getCol()];
-            validNodes.add(validNode);
-            validNode.getStyleClass().add("legal");
-            validNode.setOnMouseClicked(this::moveKing);
+        for (var pos : legitMoves) {
+            StackPane overlayPane = new StackPane();
+            overlayPane.getStyleClass().add("legal");
+            overlayPane.setOnMouseClicked(this::moveKing);
+            grid.add(overlayPane, pos.getCol(), pos.getRow());
         }
     }
 
     private void moveKnight(MouseEvent event) {
-        clearValidNodes();
         var source = (Node) event.getSource();
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
@@ -90,7 +97,6 @@ public class GameController {
     }
 
     private void moveKing(MouseEvent event) {
-        clearValidNodes();
         var source = (Node) event.getSource();
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
@@ -100,47 +106,38 @@ public class GameController {
         printBoard();
     }
 
-    private void clearValidNodes() {
-        validNodes.forEach(node -> {
-            node.getStyleClass().remove("legal");
-            node.setOnMouseClicked(event1 -> {});
-        });
-    }
-
     private void drawKnight(){
         Position knightPos = state.getKnightPos();
 
         ImageView knight = new ImageView("/theBodyguard/images/blackKnight.png");
-        knight.setFitHeight(70);
-        knight.setFitWidth(70);
+        knight.setFitHeight(60);
+        knight.setFitWidth(60);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
-        board[knightPos.getRow()][knightPos.getCol()] = knight;
-
-        if(state.nextPlayer == State.KNIGHT){
-            Node knightNode = board[knightPos.getRow()][knightPos.getCol()];
-            knightNode.getStyleClass().add("nextPlayer");
-        }
     }
 
     private void drawKing(){
         Position KingPos = state.getKingPos();
         ImageView king = new ImageView("/theBodyguard/images/king.png");
-        king.setFitHeight(70);
-        king.setFitWidth(70);
+        king.setFitHeight(60);
+        king.setFitWidth(60);
         grid.add(king,KingPos.getCol(),KingPos.getRow());
-        board[KingPos.getRow()][KingPos.getCol()] = king;
-
-
     }
 
     private void drawFinish(){
-        Position finishPos = new Position(state.rowBorder-1, state.colBorder-2);
+        var url = "/theBodyguard/images/finish.png";
 
-        ImageView finish = new ImageView("/theBodyguard/images/finish.png");
-        finish.setFitHeight(70);
-        finish.setFitWidth(70);
+        Position king = state.getKingPos();
+        Position knight = state.getKnightPos();
+        Position finishPos = new Position(state.rowBorder-1, state.colBorder-2);
+        if(finishPos.equals(king) ||finishPos.equals(knight)) {
+            url = "/theBodyguard/images/finishBorder.png";
+        }
+
+        ImageView finish = new ImageView(url);
+        finish.setFitHeight(75);
+        finish.setFitWidth(75);
+        finish.toBack();
         grid.add(finish,finishPos.getCol(),finishPos.getRow());
-        board[finishPos.getRow()][finishPos.getCol()] = finish;
     }
 
     private void colorChessBoard(){
@@ -150,7 +147,6 @@ public class GameController {
                 square.getStyleClass().add("square");
                 square.getStyleClass().add((row + col) % 2 == 0 ? "light" : "dark");
                 grid.add(square, col, row);
-                board[row][col] = square;
             }
         }
     }

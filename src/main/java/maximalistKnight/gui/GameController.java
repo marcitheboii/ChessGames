@@ -80,8 +80,8 @@ public class GameController {
         Position knightPos = state.getKnightsPos();
 
         ImageView knight = new ImageView("/maximalistKnight/images/blackKnight.png");
-        knight.setFitHeight(responsiveSize("height"));
-        knight.setFitWidth(responsiveSize("size"));
+        knight.setFitHeight(responsiveSize("height")-30);
+        knight.setFitWidth(responsiveSize("size")-30);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
         board[knightPos.getRow()][knightPos.getCol()] = knight;
     }

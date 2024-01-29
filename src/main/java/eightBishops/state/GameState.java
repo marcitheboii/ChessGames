@@ -97,9 +97,11 @@ public class GameState {
         return AllPossibleMoves;
     }
 
+
     private ArrayList<Position> directedBishopSteps(Position bishopPos,int[] cord,ArrayList<Position> moves){
 
         State colorOfBishop = board[bishopPos.getRow()][bishopPos.getCol()];
+
 
         if(colorOfBishop != State.WHITE && colorOfBishop != State.BLACK){
             colorOfBishop = findPrevColor(bishopPos,cord);

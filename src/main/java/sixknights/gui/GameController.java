@@ -33,8 +33,8 @@ public class GameController {
     private Node[][] board;
     private final List<Node> validNodes = new ArrayList<>();
 
-    private static final int nodeHeight = 140;
-    private static final int nodeWidth = 140;
+    private static final int nodeHeight = 110;
+    private static final int nodeWidth = 110;
 
     /**
      *  Fxml által meghívásra kerülő kezdő függvény.

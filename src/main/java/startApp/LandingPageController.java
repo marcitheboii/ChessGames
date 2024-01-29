@@ -71,12 +71,17 @@ public class LandingPageController {
 
     }
 
+    private void OpenUI(String url){
+
+    }
+
     public void handleGoToLonelyKnight(javafx.scene.input.MouseEvent event) {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,6 +94,7 @@ public class LandingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/maximalistKnight/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,6 +107,7 @@ public class LandingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/eightBishops/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,6 +120,7 @@ public class LandingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/sixKnights/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,6 +133,7 @@ public class LandingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/theBodyguard/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -137,6 +146,7 @@ public class LandingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tightGame/ui.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
