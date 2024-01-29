@@ -31,10 +31,6 @@ public class Stopwatch {
             elapsedMillis = stopTime - startTime;
         }
 
-        if (elapsedMillis == 0) {
-            return "0:00:000";
-        }
-
         long minutes = elapsedMillis / (60 * 1000);
         long seconds = (elapsedMillis % (60 * 1000)) / 1000;
         long milliseconds = elapsedMillis % 1000;
