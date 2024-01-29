@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import lonelyKnight.state.GameState;
+import lonelyKnight.state.State;
 import org.tinylog.Logger;
 import startApp.Position;
 
@@ -21,8 +22,6 @@ public class GameController {
 
     @FXML
     private GridPane grid;
-
-    private Node[][] board;
 
     private GameState state = new GameState();
 
@@ -39,15 +38,10 @@ public class GameController {
     private void printBoard(){
         grid.getChildren().clear();
 
-        board = new Node[grid.getRowCount()][grid.getColumnCount()];
-
         colorChessBoard();
-        styleLegalFields();
         setFinish();
+        styleLegalFields();
         drawKnight();
-
-
-        Logger.info("Board printed");
     }
 
     private void colorChessBoard(){
@@ -65,13 +59,14 @@ public class GameController {
         Position knightPos = state.getKnightsPos();
 
         ImageView knight = new ImageView("/lonelyKnight/images/whiteKnight.png");
-        knight.setFitHeight(70);
-        knight.setFitWidth(70);
+        knight.setFitHeight(60);
+        knight.setFitWidth(60);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
     }
 
     private void styleLegalFields(){
         ArrayList<Position> allMoves = state.allMovesArray();
+        System.out.println(allMoves);
 
         for (var pos : allMoves){
             var square = new StackPane();
@@ -82,7 +77,11 @@ public class GameController {
     }
 
     private void setFinish(){
-        ImageView finish = new ImageView("/lonelyKnight/images/finish.png");
+        var url = "/lonelyKnight/images/finish.png";
+        if(state.board[state.rowBorder-1][state.colBorder-1] == State.KNIGHT) {
+            url = "/lonelyKnight/images/finishBorder.png";
+        }
+        ImageView finish = new ImageView(url);
         finish.setFitHeight(responsiveSize("height"));
         finish.setFitWidth(responsiveSize("width"));
         finish.setOnMouseClicked(this::moveKnight);

@@ -45,7 +45,7 @@ public class LandingPageController {
 
     private void setImages(){
 
-        ImageView lonelyKnight = new ImageView((LandingPageController.class.getResource("/lonelyKnight/images/opening.png")).toExternalForm());
+        ImageView lonelyKnight = new ImageView((Objects.requireNonNull(LandingPageController.class.getResource("/lonelyKnight/images/opening.png"))).toExternalForm());
         lonelyKnightImage.setImage(lonelyKnight.getImage());
         lonelyKnightImage.setOnMouseClicked(this::handleGoToLonelyKnight);
 
