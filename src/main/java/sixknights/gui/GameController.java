@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 import sixknights.state.State;
-import sixknights.state.sixKnightsGameState;
+import sixknights.state.GameState;
 import startApp.Position;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class GameController {
     private GridPane grid;
     @FXML
     private Label topLabel;
-    private sixKnightsGameState state = new sixKnightsGameState();
+    private GameState state = new GameState();
     private Position selected;
     private Node[][] board;
     private final List<Node> validNodes = new ArrayList<>();
@@ -41,7 +41,7 @@ public class GameController {
      */
     @FXML
     private void initialize(){
-        state = new sixKnightsGameState();
+        state = new GameState();
         printBoard();
     }
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static sixknights.state.State.*;
 
-public class sixKnightsGameState {
+public class GameState {
 
     /**
      *  A sakktábla sorainak száma.
@@ -32,7 +32,7 @@ public class sixKnightsGameState {
     /**
      *  Argumentum nélküli konstruktor.
      */
-    public sixKnightsGameState(){
+    public GameState(){
         this.board = new State[rowBorder][colBorder];
         this.nextPlayer = WHITE;
 
@@ -50,7 +50,7 @@ public class sixKnightsGameState {
      * @param w3 harmadik fehér huszár
      * @param color játékban következő oldal
      */
-    public sixKnightsGameState(Position b1, Position b2, Position b3, Position w1, Position w2, Position w3, State color){
+    public GameState(Position b1, Position b2, Position b3, Position w1, Position w2, Position w3, State color){
         this.board = new State[rowBorder][colBorder];
         this.nextPlayer = color;
 
@@ -269,7 +269,7 @@ public class sixKnightsGameState {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof sixKnightsGameState state)) return false;
+        if (!(o instanceof GameState state)) return false;
         return Arrays.deepEquals(board, state.board) && nextPlayer == state.nextPlayer;
     }
 }

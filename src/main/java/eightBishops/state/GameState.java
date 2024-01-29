@@ -1,6 +1,5 @@
 package eightBishops.state;
 
-import sixknights.state.sixKnightsGameState;
 import startApp.Position;
 
 import java.util.ArrayList;
@@ -249,7 +248,7 @@ public class GameState {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof sixKnightsGameState state)) return false;
+        if (!(o instanceof GameState state)) return false;
         return Arrays.deepEquals(board, state.board);
     }
 }

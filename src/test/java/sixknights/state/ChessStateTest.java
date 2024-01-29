@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChessStateTest {
     @Test
     void setStartBoard() {
-        sixKnightsGameState randomState = new sixKnightsGameState(
+        GameState randomState = new GameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -20,7 +20,7 @@ class ChessStateTest {
                 new Position(3,1),
                 State.BLACK);
         randomState.setStartBoard();
-        sixKnightsGameState startPositionManual = new sixKnightsGameState(
+        GameState startPositionManual = new GameState(
                 new Position(0,0),
                 new Position(0,1),
                 new Position(0,2),
@@ -37,7 +37,7 @@ class ChessStateTest {
 
     @Test
     void goalTest() {
-        sixKnightsGameState goalState = new sixKnightsGameState(
+        GameState goalState = new GameState(
                 new Position(3,0),
                 new Position(3,1),
                 new Position(3,2),
@@ -46,7 +46,7 @@ class ChessStateTest {
                 new Position(0,1),
                 new Position(0,2),
                 State.BLACK);
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
         assertFalse(state.goalTest());
         assertTrue(goalState.goalTest());
 
@@ -54,9 +54,9 @@ class ChessStateTest {
 
     @Test
     void movePiece() {
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
         state.movePiece(new Position(0,0),new Position(2,1));
-        sixKnightsGameState expectedState = new sixKnightsGameState(
+        GameState expectedState = new GameState(
                 new Position(2,1),
                 new Position(0,1),
                 new Position(0,2),
@@ -68,9 +68,9 @@ class ChessStateTest {
         expectedState.calculateBoard();
         assertEquals(expectedState,state);
 
-        sixKnightsGameState state1 = new sixKnightsGameState();
+        GameState state1 = new GameState();
         state1.movePiece(new Position(3,0),new Position(1,1));
-        sixKnightsGameState expectedState2 = new sixKnightsGameState(
+        GameState expectedState2 = new GameState(
                 new Position(0,0),
                 new Position(0,1),
                 new Position(0,2),
@@ -85,7 +85,7 @@ class ChessStateTest {
 
     @Test
     void changeNextPlayer() {
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
         state.changeNextPlayer();
         assertEquals(State.BLACK,state.nextPlayer);
         state.changeNextPlayer();
@@ -96,7 +96,7 @@ class ChessStateTest {
 
     @Test
     void prepBoardForCalculation() {
-        sixKnightsGameState expectedState = new sixKnightsGameState();
+        GameState expectedState = new GameState();
         for(int row = 0;row < expectedState.rowBorder;row ++){
             for(int col = 0;col < expectedState.colBorder;col++){
                 expectedState.board[row][col] = State.SAFE;
@@ -111,7 +111,7 @@ class ChessStateTest {
         expectedState.board[3][1] = State.WHITE;
         expectedState.board[3][2] = State.WHITE;
 
-        sixKnightsGameState testState = new sixKnightsGameState(
+        GameState testState = new GameState(
                 new Position(2,1),
                 new Position(0,1),
                 new Position(0,2),
@@ -140,7 +140,7 @@ class ChessStateTest {
 
     @Test
     void isOnBoard() {
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
 
         Position x = new Position(0,0);
         assertTrue(state.isOnBoard(x));
@@ -160,7 +160,7 @@ class ChessStateTest {
 
     @Test
     void allMovesArray() {
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
         ArrayList<Position> pos = new ArrayList<>();
         pos.add(new Position(2,1));
         pos.add(new Position(1,2));
@@ -175,7 +175,7 @@ class ChessStateTest {
 
     @Test
     void legalMovesArray() {
-        sixKnightsGameState randomState = new sixKnightsGameState(
+        GameState randomState = new GameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -196,13 +196,13 @@ class ChessStateTest {
 
     @Test
     void testToString() {
-        sixKnightsGameState state = new sixKnightsGameState();
+        GameState state = new GameState();
         assertEquals("\nBLACK BLACK BLACK \nDEAD WHITE_HIT DEAD \nDEAD BLACK_HIT DEAD \nWHITE WHITE WHITE \n",state.toString());
     }
 
     @Test
     void equals(){
-        sixKnightsGameState randomState = new sixKnightsGameState(
+        GameState randomState = new GameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -211,7 +211,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.BLACK);
-        sixKnightsGameState randomState2 = new sixKnightsGameState(
+        GameState randomState2 = new GameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -220,7 +220,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.BLACK);
-        sixKnightsGameState randomState3 = new sixKnightsGameState(
+        GameState randomState3 = new GameState(
                 new Position(0,0),
                 new Position(2,2),
                 new Position(0,2),
@@ -229,7 +229,7 @@ class ChessStateTest {
                 new Position(2,0),
                 new Position(3,1),
                 State.WHITE);
-        sixKnightsGameState randomState4 = new sixKnightsGameState(
+        GameState randomState4 = new GameState(
                 new Position(0,0),
                 new Position(0,2),
                 new Position(0,2),
