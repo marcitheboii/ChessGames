@@ -1,5 +1,8 @@
 package lonelyKnight.gui;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lonelyKnight.state.GameState;
 import lonelyKnight.state.State;
 import org.tinylog.Logger;
 import startApp.Position;
+import startApp.Stopwatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,12 +31,36 @@ public class GameController {
     private GameState state = new GameState();
 
     @FXML
+    private javafx.scene.control.Label stopWatch;
+
+    private final Stopwatch stopwatch = new Stopwatch();
+
+    @FXML
     private void initialize(){
+        updateTimer();
+
         state = new GameState();
         printBoard();
     }
+
+    private void updateTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            if (stopwatch.isRunning()) {
+                updateElapsedTimeLabel();
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void updateElapsedTimeLabel() {
+        Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
+    }
+
     public void resetGame(){
         grid.setDisable(false);
+        stopwatch.reset();
+        updateElapsedTimeLabel();
         initialize();
     }
 
@@ -42,6 +71,13 @@ public class GameController {
         setFinish();
         styleLegalFields();
         drawKnight();
+    }
+
+    public void startTimer(){
+        stopwatch.start();
+    }
+
+    public void openHelp(){
     }
 
     private void colorChessBoard(){
@@ -117,7 +153,8 @@ public class GameController {
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
         state.moveKnight(new Position(row,col));
-        System.out.println(new Position(row,col));
+
+        stopwatch.start();
 
         isGameOver();
         printBoard();
@@ -126,6 +163,7 @@ public class GameController {
     private void isGameOver(){
         if(state.isOver()){
             grid.setDisable(true);
+            stopwatch.stop();
             Logger.error("VEGEEE");
         }
     }
