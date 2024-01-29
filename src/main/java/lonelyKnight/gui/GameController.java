@@ -117,6 +117,7 @@ public class GameController {
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
         state.moveKnight(new Position(row,col));
+        System.out.println(new Position(row,col));
 
         isGameOver();
         printBoard();

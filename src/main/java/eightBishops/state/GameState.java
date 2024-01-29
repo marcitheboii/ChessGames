@@ -144,12 +144,12 @@ public class GameState {
 
     public void moveBishop(Position from, Position to){
         if(isOnBoard(from) && isOnBoard(to)){
-            if (board[from.getRow()][from.getCol()] == State.BLACK &&(board[to.getRow()][to.getCol()] == State.BLACK_HIT || board[to.getRow()][to.getCol()] == State.SAFE)){
+            if (board[from.getRow()][from.getCol()] == State.BLACK){
 
                 board[from.getRow()][from.getCol()] = State.SAFE;
                 board[to.getRow()][to.getCol()] = State.BLACK;
 
-            } else if (board[from.getRow()][from.getCol()] == State.WHITE &&(board[to.getRow()][to.getCol()] == State.WHITE_HIT || board[to.getRow()][to.getCol()] == State.SAFE)){
+            } else if (board[from.getRow()][from.getCol()] == State.WHITE){
 
                 board[from.getRow()][from.getCol()] = State.SAFE;
                 board[to.getRow()][to.getCol()] = State.WHITE;
@@ -224,7 +224,7 @@ public class GameState {
         }
     }
 
-    public boolean isOnBoard(Position position){
+    private boolean isOnBoard(Position position){
         return position.getRow() >= 0 &&
                 position.getRow() < rowBorder &&
                 position.getCol() >= 0 &&

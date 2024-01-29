@@ -1,13 +1,14 @@
 package sixknights.state;
 
-import startApp.Position;
 import org.junit.jupiter.api.Test;
+import startApp.Position;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ChessStateTest {
+class SixKnightsGameStateTest {
+
     @Test
     void setStartBoard() {
         GameState randomState = new GameState(

@@ -5,8 +5,6 @@ import startApp.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static sixknights.state.State.*;
-
 public class GameState {
 
     /**
@@ -34,7 +32,7 @@ public class GameState {
      */
     public GameState(){
         this.board = new State[rowBorder][colBorder];
-        this.nextPlayer = WHITE;
+        this.nextPlayer = State.WHITE;
 
         setStartBoard();
     }
@@ -54,13 +52,13 @@ public class GameState {
         this.board = new State[rowBorder][colBorder];
         this.nextPlayer = color;
 
-        board[b1.getRow()][b1.getCol()] = BLACK;
-        board[b2.getRow()][b2.getCol()] = BLACK;
-        board[b3.getRow()][b3.getCol()] = BLACK;
+        board[b1.getRow()][b1.getCol()] = State.BLACK;
+        board[b2.getRow()][b2.getCol()] = State.BLACK;
+        board[b3.getRow()][b3.getCol()] = State.BLACK;
 
-        board[w1.getRow()][w1.getCol()] = WHITE;
-        board[w2.getRow()][w2.getCol()] = WHITE;
-        board[w3.getRow()][w3.getCol()] = WHITE;
+        board[w1.getRow()][w1.getCol()] = State.WHITE;
+        board[w2.getRow()][w2.getCol()] = State.WHITE;
+        board[w3.getRow()][w3.getCol()] = State.WHITE;
     }
 
     /**
@@ -68,12 +66,12 @@ public class GameState {
      */
     public void setStartBoard(){
         for(int i=0; i < colBorder; i++ ) {
-            board[0][i] = BLACK;
-            board[1][i] = SAFE;
-            board[2][i] = SAFE;
-            board[3][i] = WHITE;
+            board[0][i] = State.BLACK;
+            board[1][i] = State.SAFE;
+            board[2][i] = State.SAFE;
+            board[3][i] = State.WHITE;
         }
-        nextPlayer = WHITE;
+        nextPlayer = State.WHITE;
         calculateBoard();
     }
 
@@ -84,7 +82,7 @@ public class GameState {
     public boolean goalTest() {
         int counter = 0;
         for(int i=0; i < colBorder; i++ ){
-            if (this.board[0][i] == WHITE && this.board[3][i] == BLACK)
+            if (this.board[0][i] == State.WHITE && this.board[3][i] == State.BLACK)
                 counter++;
         }
         return counter == colBorder;
@@ -96,12 +94,12 @@ public class GameState {
      * @param to Ahová a huszárt mozdítani szeretnénk
      */
     public void movePiece(Position from, Position to){
-        if(board[from.getRow()][from.getCol()] == BLACK) {
-            board[to.getRow()][to.getCol()] =  BLACK;
-            board[from.getRow()][from.getCol()] = BLACK_HIT;
-        }else if(board[from.getRow()][from.getCol()] == WHITE) {
-            board[to.getRow()][to.getCol()] = WHITE;
-            board[from.getRow()][from.getCol()] = WHITE_HIT;
+        if(board[from.getRow()][from.getCol()] == State.BLACK) {
+            board[to.getRow()][to.getCol()] =  State.BLACK;
+            board[from.getRow()][from.getCol()] = State.BLACK_HIT;
+        }else if(board[from.getRow()][from.getCol()] == State.WHITE) {
+            board[to.getRow()][to.getCol()] = State.WHITE;
+            board[from.getRow()][from.getCol()] = State.WHITE_HIT;
         }
         calculateBoard();
         changeNextPlayer();
@@ -111,10 +109,10 @@ public class GameState {
      *  Következő oldal/szín megválzotzatása.
      */
     public void changeNextPlayer(){
-        if(nextPlayer == BLACK) {
-            nextPlayer = WHITE;
-        } else if (nextPlayer ==WHITE) {
-            nextPlayer = BLACK;
+        if(nextPlayer == State.BLACK) {
+            nextPlayer = State.WHITE;
+        } else if (nextPlayer ==State.WHITE) {
+            nextPlayer = State.BLACK;
         }
     }
 
@@ -127,12 +125,12 @@ public class GameState {
 
         for(int row = 0; row < rowBorder; row++){
             for(int col = 0; col < colBorder; col++){
-                newBoard[row][col] = SAFE;
-                if(this.board[row][col] == BLACK) {
-                    newBoard[row][col] = BLACK;
+                newBoard[row][col] = State.SAFE;
+                if(this.board[row][col] == State.BLACK) {
+                    newBoard[row][col] = State.BLACK;
                     }
-                else if(this.board[row][col] == WHITE) {
-                    newBoard[row][col] = WHITE;
+                else if(this.board[row][col] == State.WHITE) {
+                    newBoard[row][col] = State.WHITE;
                     }
                 }
             }
@@ -147,8 +145,8 @@ public class GameState {
         for(int row = 0; row < rowBorder; row++){
             for(int col = 0; col < colBorder; col++){
                 switch (board[row][col]) {
-                    case BLACK -> calculateBoardHelper(new Position(row, col), BLACK);
-                    case WHITE -> calculateBoardHelper(new Position(row, col), WHITE);
+                    case BLACK -> calculateBoardHelper(new Position(row, col), State.BLACK);
+                    case WHITE -> calculateBoardHelper(new Position(row, col), State.WHITE);
                 }
                 }
             }
@@ -162,19 +160,19 @@ public class GameState {
      */
     public void calculateBoardHelper(Position position, State nextPlayer){
 
-        if(nextPlayer == BLACK){
+        if(nextPlayer == State.BLACK){
             for(Position pos : allMovesArray(position.getRow(), position.getCol())){
                 switch (board[pos.getRow()][pos.getCol()]) {
-                    case SAFE -> board[pos.getRow()][pos.getCol()] = BLACK_HIT;
-                    case WHITE_HIT -> board[pos.getRow()][pos.getCol()] = DEAD;
+                    case SAFE -> board[pos.getRow()][pos.getCol()] = State.BLACK_HIT;
+                    case WHITE_HIT -> board[pos.getRow()][pos.getCol()] = State.DEAD;
                 }
             }
         }
-        else if(nextPlayer == WHITE){
+        else if(nextPlayer == State.WHITE){
             for(Position pos : allMovesArray(position.getRow(), position.getCol())){
                 switch (board[pos.getRow()][pos.getCol()]) {
-                    case SAFE -> board[pos.getRow()][pos.getCol()] = WHITE_HIT;
-                    case BLACK_HIT -> board[pos.getRow()][pos.getCol()] = DEAD;
+                    case SAFE -> board[pos.getRow()][pos.getCol()] = State.WHITE_HIT;
+                    case BLACK_HIT -> board[pos.getRow()][pos.getCol()] = State.DEAD;
                 }
             }
         }
@@ -230,14 +228,14 @@ public class GameState {
 
             for (Position futurePosition : allMovesArray(standingOnX,standingOnY)) {
 
-                if (nextPlayer == WHITE) {
-                    if (board[futurePosition.getRow()][futurePosition.getCol()] == WHITE_HIT  ||
-                            board[futurePosition.getRow()][futurePosition.getCol()] == SAFE)
+                if (nextPlayer == State.WHITE) {
+                    if (board[futurePosition.getRow()][futurePosition.getCol()] == State.WHITE_HIT  ||
+                            board[futurePosition.getRow()][futurePosition.getCol()] == State.SAFE)
                     {legitMoves.add(futurePosition);}
                 }
-                if (nextPlayer == BLACK) {
-                    if (board[futurePosition.getRow()][futurePosition.getCol()] == BLACK_HIT ||
-                            board[futurePosition.getRow()][futurePosition.getCol()] == SAFE)
+                if (nextPlayer == State.BLACK) {
+                    if (board[futurePosition.getRow()][futurePosition.getCol()] == State.BLACK_HIT ||
+                            board[futurePosition.getRow()][futurePosition.getCol()] == State.SAFE)
                     {legitMoves.add(futurePosition);}
                 }
             }

@@ -4,9 +4,9 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>hu.unideb.inf</groupId>
-    <artifactId>SixKnights</artifactId>
+    <artifactId>ChessGames</artifactId>
     <version>1.0</version>
-    <description>Feladatok.pdf-ből a 2.6-os számú sakkos feladat</description>
+    <description>Szakdolgozat</description>
     <developers>
         <developer>
             <id>tth.marci</id>
@@ -27,7 +27,7 @@
         <maven.surefire.version>3.0.0</maven.surefire.version>
         <jacoco.version>0.8.9</jacoco.version>
         <tinylog.version>2.6.1</tinylog.version>
-        <exec.mainClass>sixknights.gui.Main</exec.mainClass>
+        <exec.mainClass>startApp.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>
