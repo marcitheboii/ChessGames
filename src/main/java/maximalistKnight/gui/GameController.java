@@ -66,7 +66,12 @@ public class GameController {
         stopwatch.start();
     }
 
-    public void openHelp(){
+    public void openHelp(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/maximalistKnight/help.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void resetGame(){

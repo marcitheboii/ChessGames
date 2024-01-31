@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eightBishops.gui.HelpController">
+    <children>
+        <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../theBodyguard/images/finish.png" />
+            </image>
+        </ImageView>
+        <Pane layoutX="54.0" layoutY="41.0" prefHeight="719.0" prefWidth="693.0" style="-fx-background-color: white;">
+            <children>
+                <Label alignment="CENTER" layoutX="199.0" layoutY="14.0" prefHeight="96.0" prefWidth="349.0" text="Eight bishops">
+                    <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="29.0" />
+                    </font>
+                </Label>
+                <Label layoutX="85.0" layoutY="71.0" prefHeight="58.0" prefWidth="176.0" text="Rules:">
+                    <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label layoutX="104.0" layoutY="117.0" prefHeight="58.0" prefWidth="521.0" text="1. Only valid chess moves">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Button layoutX="573.0" layoutY="648.0" mnemonicParsing="false" onAction="#backToGame" text="Understood!">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </Button>
+                <Label layoutX="104.0" layoutY="175.0" prefHeight="58.0" prefWidth="521.0" text="2. In the top row there are 4 dark bishops">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="104.0" layoutY="233.0" prefHeight="58.0" prefWidth="521.0" text="3. In the bottom row there are 4 white bishops">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="104.0" layoutY="291.0" prefHeight="58.0" prefWidth="521.0" text="4. White starts">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="104.0" layoutY="349.0" prefHeight="58.0" prefWidth="521.0" text="5. Bishops can't move where it could be captured ">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            <Label layoutX="104.0" layoutY="407.0" prefHeight="58.0" prefWidth="521.0" text="6. Goal is to swap the bishops: whites on top, darks bottom row">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

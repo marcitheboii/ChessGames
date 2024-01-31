@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="800.0" maxWidth="800.0" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tightGame.gui.HelpController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lonelyKnight/images/finish.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="54.0" layoutY="41.0" prefHeight="719.0" prefWidth="693.0" style="-fx-background-color: white;">
+         <children>
+            <Label alignment="CENTER" layoutX="199.0" layoutY="14.0" prefHeight="96.0" prefWidth="349.0" text="The Tight Game">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="110.0" prefHeight="58.0" prefWidth="176.0" text="Rules:">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="117.0" layoutY="161.0" prefHeight="58.0" prefWidth="290.0" text="1. Only valid chess moves">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="117.0" layoutY="219.0" prefHeight="58.0" prefWidth="290.0" text="2. Reach goal state">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="298.0" prefHeight="58.0" prefWidth="176.0" text="Start State:">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="234.0" fitWidth="349.0" layoutX="407.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/about.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="407.0" layoutY="298.0" prefHeight="58.0" prefWidth="176.0" text="Goal State:">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="234.0" fitWidth="235.0" layoutX="82.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/opening.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="555.0" layoutY="653.0" mnemonicParsing="false" onAction="#backToGame" text="Understood!">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
