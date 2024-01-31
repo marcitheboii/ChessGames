@@ -232,6 +232,10 @@ public class GameController {
             grid.setDisable(true);
             return true;
         }
+
+        if (state.goalTest()){
+            setFeedBackLabel("CONGRATULATIONS! You beat the game! ");
+        }
         return false;
     }
 
