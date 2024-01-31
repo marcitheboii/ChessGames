@@ -1,5 +1,8 @@
 package maximalistKnight.gui;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import maximalistKnight.state.GameState;
 import maximalistKnight.state.State;
 import org.tinylog.Logger;
 import startApp.Position;
+import startApp.Stopwatch;
 
 import java.io.IOException;
 
@@ -26,12 +31,47 @@ public class GameController {
     private Node[][] board;
 
     @FXML
+    private javafx.scene.control.Label stopWatch;
+
+    private final Stopwatch stopwatch = new Stopwatch();
+
+    @FXML
+    private javafx.scene.control.Label feedBackLabel;
+
+    @FXML
     private void initialize(){
+        updateTimer();
         state = new GameState();
         printBoard();
     }
+    private void updateTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            if (stopwatch.isRunning()) {
+                updateElapsedTimeLabel();
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void setFeedBackLabel(String text){
+        feedBackLabel.setText(text);
+    }
+
+    private void updateElapsedTimeLabel() {
+        Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
+    }
+
+    public void startTimer(){
+        stopwatch.start();
+    }
+
+    public void openHelp(){
+    }
 
     public void resetGame(){
+        stopwatch.reset();
+        updateElapsedTimeLabel();
         grid.setDisable(false);
         initialize();
     }
@@ -107,6 +147,8 @@ public class GameController {
         var col = GridPane.getColumnIndex(source);
         state.moveKnight(new Position(row,col));
 
+        stopwatch.start();
+
         isGameOver();
         printBoard();
     }
@@ -117,10 +159,14 @@ public class GameController {
                 break;
             case 1:
                 grid.setDisable(true);
+                stopwatch.stop();
+                setFeedBackLabel("YOU LOST! You have ran out of valid moves!");
                 Logger.error("GAME OVER, YOU LOST");
                 break;
             case 2:
+                stopwatch.stop();
                 grid.setDisable(true);
+                setFeedBackLabel("CONGRATULATIONS! You beat the game!");
                 Logger.error("GAME OVER, YOU WIN");
                 break;
         }

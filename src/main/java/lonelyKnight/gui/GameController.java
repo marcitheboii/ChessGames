@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lonelyKnight.state.GameState;
 import lonelyKnight.state.State;
-import org.tinylog.Logger;
 import startApp.Position;
 import startApp.Stopwatch;
 
@@ -36,9 +35,12 @@ public class GameController {
     private final Stopwatch stopwatch = new Stopwatch();
 
     @FXML
+    private javafx.scene.control.Label feedBackLabel;
+
+    @FXML
     private void initialize(){
         updateTimer();
-
+        setFeedBackLabel("Start by moving the knight or by starting the timer!!");
         state = new GameState();
         printBoard();
     }
@@ -53,6 +55,10 @@ public class GameController {
         timeline.play();
     }
 
+    private void setFeedBackLabel(String text){
+        feedBackLabel.setText(text);
+    }
+
     private void updateElapsedTimeLabel() {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
@@ -61,6 +67,7 @@ public class GameController {
         grid.setDisable(false);
         stopwatch.reset();
         updateElapsedTimeLabel();
+        setFeedBackLabel("Board back to original state! Good Luck!");
         initialize();
     }
 
@@ -164,7 +171,7 @@ public class GameController {
         if(state.isOver()){
             grid.setDisable(true);
             stopwatch.stop();
-            Logger.error("VEGEEE");
+            setFeedBackLabel("Congratulations! You beat the game!");
         }
     }
 

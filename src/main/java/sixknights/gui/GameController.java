@@ -1,5 +1,7 @@
 package sixknights.gui;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +15,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.tinylog.Logger;
 import sixknights.state.State;
 import sixknights.state.GameState;
 import startApp.Position;
+import startApp.Stopwatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,8 +30,6 @@ public class GameController {
 
     @FXML
     private GridPane grid;
-    @FXML
-    private Label topLabel;
     private GameState state = new GameState();
     private Position selected;
     private Node[][] board;
@@ -36,16 +38,50 @@ public class GameController {
     private static final int nodeHeight = 110;
     private static final int nodeWidth = 110;
 
+    private Stopwatch stopwatch = new Stopwatch();
+    @FXML
+    private Label feedBackLabel;
+    @FXML
+    private Label stopWatch;
+
     /**
      *  Fxml által meghívásra kerülő kezdő függvény.
      */
     @FXML
     private void initialize(){
+        updateTimer();
         state = new GameState();
         printBoard();
     }
 
+    private void updateTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            if (stopwatch.isRunning()) {
+                updateElapsedTimeLabel();
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void setFeedBackLabel(String text){
+        feedBackLabel.setText(text);
+    }
+
+    private void updateElapsedTimeLabel() {
+        Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
+    }
+
+    public void startTimer(){
+        stopwatch.start();
+    }
+
+    public void openHelp(){
+    }
+
     public void resetGame(){
+        stopwatch.reset();
+        updateElapsedTimeLabel();
         grid.setDisable(false);
         initialize();
     }
@@ -54,7 +90,10 @@ public class GameController {
      * A játéktáblát benépesítő függvény, újrarajzolja az eltárolt állapot alapján a huszárok helyét.
      */
     private void printBoard(){
+        isGameOver();
         grid.getChildren().clear();
+
+        setFeedBackLabel("Next player: "+state.nextPlayer);
 
         board = new Node[grid.getRowCount()][grid.getColumnCount()];
 
@@ -74,7 +113,6 @@ public class GameController {
             }
         }
         Logger.info("Board printed");
-        labelHandler();
     }
 
     private void addWhiteKnight(int row, int col){
@@ -137,6 +175,8 @@ public class GameController {
         Logger.trace("Move to (" + row + "," + col + ")");
         state.movePiece(selected,new Position(row,col));
         printBoard();
+
+        stopwatch.start();
     }
 
     /**
@@ -168,24 +208,6 @@ public class GameController {
     }
 
     /**
-     * Játéktábla feletti üzeneteket kezelő föggvény.
-     */
-    private void labelHandler(){
-        if(isGameOver()){
-            Platform.runLater(() -> topLabel.setText(String.format("GAME OVER!\n No more moves for : " + state.nextPlayer + " !")));
-        }else {
-            if(state.goalTest()){
-                Platform.runLater(() -> topLabel.setText("Congratulations!!"));
-                Logger.trace("Goal state reached!");
-            }else {
-                Platform.runLater(() -> topLabel.setText(String.format("Next side : " + state.nextPlayer)));
-                Logger.trace("Next side: " + state.nextPlayer);
-            }
-
-        }
-    }
-
-    /**
      * Lépések hiánya miatt véget érő játékállapotok tesztelése.
      * @return Igaz ha nincs több lépése az adott oldalnak
      */
@@ -204,6 +226,8 @@ public class GameController {
             }
         }
         if(counter == 3){
+            stopwatch.stop();
+            setFeedBackLabel("YOU LOST! No more moves for: " +state.nextPlayer+ " !");
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
             grid.setDisable(true);
             return true;

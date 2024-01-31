@@ -67,7 +67,10 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="60.0" prefWidth="516.0" text="Label" HBox.hgrow="SOMETIMES" />
+            <Label fx:id="feedBackLabel" alignment="CENTER" prefHeight="60.0" prefWidth="516.0" HBox.hgrow="SOMETIMES">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+               </font></Label>
          </children></HBox>
     </bottom>
     <left>

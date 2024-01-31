@@ -1,18 +1,24 @@
 package theBodyguard.gui;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.tinylog.Logger;
 import startApp.Position;
+import startApp.Stopwatch;
 import theBodyguard.state.GameState;
 import theBodyguard.state.State;
 
@@ -25,18 +31,53 @@ public class GameController {
 
     private GameState state = new GameState();
 
+    private Stopwatch stopwatch = new Stopwatch();
+    @FXML
+    private Label feedBackLabel;
+    @FXML
+    private Label stopWatch;
+
     @FXML
     private void initialize(){
+        updateTimer();
         state = new GameState();
         printBoard();
     }
 
+    private void updateTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            if (stopwatch.isRunning()) {
+                updateElapsedTimeLabel();
+            }
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void setFeedBackLabel(String text){
+        feedBackLabel.setText(text);
+    }
+
+    private void updateElapsedTimeLabel() {
+        Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
+    }
+
+    public void startTimer(){
+        stopwatch.start();
+    }
+
+    public void openHelp(){
+    }
+
     public void resetGame(){
+        stopwatch.reset();
+        updateElapsedTimeLabel();
         grid.setDisable(false);
         initialize();
     }
 
     private void printBoard(){
+        setFeedBackLabel("Next Player: "+state.nextPlayer);
         grid.getChildren().clear();
         isGameOver();
 
@@ -92,6 +133,8 @@ public class GameController {
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
         state.movePiece(state.getKnightPos(),new Position(row,col));
+
+        stopwatch.start();
 
         printBoard();
     }
@@ -155,6 +198,8 @@ public class GameController {
 
         if(state.isOver()){
             grid.setDisable(true);
+            stopwatch.stop();
+            setFeedBackLabel("CONGRATULATIONS! You beat the game!");
             Logger.error("GAME OVER!");
             return  true;
         }
