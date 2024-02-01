@@ -3,6 +3,8 @@ package theBodyguard.gui;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +40,13 @@ public class GameController {
     private Label stopWatch;
 
     @FXML
+    private javafx.scene.control.Label stepLabel;
+
+    private final IntegerProperty steps = new SimpleIntegerProperty();
+
+    @FXML
     private void initialize(){
+        stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         state = new GameState();
         printBoard();
@@ -75,6 +83,7 @@ public class GameController {
     }
 
     public void resetGame(){
+        steps.set(0);
         stopwatch.reset();
         updateElapsedTimeLabel();
         grid.setDisable(false);
@@ -139,6 +148,8 @@ public class GameController {
         var col = GridPane.getColumnIndex(source);
         state.movePiece(state.getKnightPos(),new Position(row,col));
 
+        steps.set(steps.get()+1);
+
         stopwatch.start();
 
         printBoard();
@@ -150,6 +161,8 @@ public class GameController {
         var col = GridPane.getColumnIndex(source);
         Logger.trace("Move to (" + row + "," + col + ")");
         state.movePiece(state.getKingPos(),new Position(row,col));
+
+        steps.set(steps.get()+1);
 
         printBoard();
     }

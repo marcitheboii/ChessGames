@@ -3,6 +3,8 @@ package lonelyKnight.gui;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,12 +40,20 @@ public class GameController {
     private javafx.scene.control.Label feedBackLabel;
 
     @FXML
+    private javafx.scene.control.Label stepLabel;
+
+    private final IntegerProperty steps = new SimpleIntegerProperty();
+
+    @FXML
     private void initialize(){
+        stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         setFeedBackLabel("Start by moving the knight or by starting the timer!!");
         state = new GameState();
         printBoard();
     }
+
+
 
     private void updateTimer() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
@@ -64,6 +74,7 @@ public class GameController {
     }
 
     public void resetGame(){
+        steps.set(0);
         grid.setDisable(false);
         stopwatch.reset();
         updateElapsedTimeLabel();
@@ -167,6 +178,8 @@ public class GameController {
         state.moveKnight(new Position(row,col));
 
         stopwatch.start();
+
+        steps.set(steps.get() + 1);
 
         isGameOver();
         printBoard();

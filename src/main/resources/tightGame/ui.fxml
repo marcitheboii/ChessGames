@@ -39,14 +39,34 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
             </Button>
-            <Label fx:id="stopWatch" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="154.0" text="0:00:000">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="72.0" text="Time:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stopWatch" alignment="CENTER" prefHeight="25.0" prefWidth="154.0" text="00:00:000">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="72.0" text="Steps:" VBox.vgrow="SOMETIMES">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stepLabel" alignment="CENTER" prefHeight="30.0" prefWidth="97.0" text="0" VBox.vgrow="SOMETIMES">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             <Button mnemonicParsing="false" onAction="#resetGame" text="Reset Game">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

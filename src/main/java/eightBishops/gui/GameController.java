@@ -5,6 +5,8 @@ import eightBishops.state.State;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,7 +48,13 @@ public class GameController {
     private Label stopWatch;
 
     @FXML
+    private javafx.scene.control.Label stepLabel;
+
+    private final IntegerProperty steps = new SimpleIntegerProperty();
+
+    @FXML
     private void initialize(){
+        stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         state = new GameState();
         printBoard();
@@ -83,6 +91,7 @@ public class GameController {
     }
 
     public void resetGame(){
+        steps.set(0);
         stopwatch.reset();
         updateElapsedTimeLabel();
         grid.setDisable(false);
@@ -145,6 +154,7 @@ public class GameController {
         state.moveBishop(selected,new Position(row,col));
 
         stopwatch.start();
+        steps.set(steps.get() + 1 );
 
         isGameover();
         printBoard();
