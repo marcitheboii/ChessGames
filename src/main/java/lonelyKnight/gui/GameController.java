@@ -18,11 +18,18 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lonelyKnight.state.GameState;
 import lonelyKnight.state.State;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import startApp.Position;
 import startApp.Stopwatch;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameController {
 
@@ -44,8 +51,13 @@ public class GameController {
 
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
+    private Boolean solved;
+
+
+
     @FXML
-    private void initialize(){
+    private void initialize() {
+        solved = false;
         stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         setFeedBackLabel("Start by moving the knight or by starting the timer!!");
@@ -53,7 +65,49 @@ public class GameController {
         printBoard();
     }
 
+    public void saveData() {
+        try {
 
+            File myObj = new File("src/main/resources/lonelyKnight/scoreboard.json");
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+
+            if (myObj.exists()) {
+                Scanner scanner = new Scanner(myObj);
+                JSONArray scoreboard = new JSONArray(scanner.nextLine());
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreboard.put(newScore);
+
+                FileWriter fileWriter = new FileWriter(myObj);
+                fileWriter.write(scoreboard.toString());
+                fileWriter.close();
+            } else {
+                FileWriter fileWriter = new FileWriter(myObj);
+                JSONArray scoreBoard = new JSONArray();
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreBoard.put(newScore);
+
+                fileWriter.write(scoreBoard.toString());
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void updateTimer() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
@@ -65,7 +119,7 @@ public class GameController {
         timeline.play();
     }
 
-    private void setFeedBackLabel(String text){
+    private void setFeedBackLabel(String text) {
         feedBackLabel.setText(text);
     }
 
@@ -73,7 +127,7 @@ public class GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void resetGame(){
+    public void resetGame() {
         steps.set(0);
         grid.setDisable(false);
         stopwatch.reset();
@@ -82,7 +136,7 @@ public class GameController {
         initialize();
     }
 
-    private void printBoard(){
+    private void printBoard() {
         grid.getChildren().clear();
 
         colorChessBoard();
@@ -91,8 +145,12 @@ public class GameController {
         drawKnight();
     }
 
-    public void startTimer(){
-        stopwatch.start();
+    public void startTimer(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/scoreboard.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void openHelp(final ActionEvent actionEvent) throws IOException {
@@ -103,7 +161,7 @@ public class GameController {
         stage.show();
     }
 
-    private void colorChessBoard(){
+    private void colorChessBoard() {
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 var square = new StackPane();
@@ -114,22 +172,22 @@ public class GameController {
         }
     }
 
-    private void drawKnight(){
+    private void drawKnight() {
         Position knightPos = state.getKnightsPos();
 
         ImageView knight = new ImageView("/lonelyKnight/images/whiteKnight.png");
         knight.setFitHeight(60);
         knight.setFitWidth(60);
-        grid.add(knight,knightPos.getCol(),knightPos.getRow());
+        grid.add(knight, knightPos.getCol(), knightPos.getRow());
     }
 
-    private void styleLegalFields(){
-        if(state.isOver()){
+    private void styleLegalFields() {
+        if (state.isOver()) {
             return;
         }
         ArrayList<Position> allMoves = state.allMovesArray();
 
-        for (var pos : allMoves){
+        for (var pos : allMoves) {
             var square = new StackPane();
             square.getStyleClass().add("legal");
             square.setOnMouseClicked(this::moveKnight);
@@ -137,45 +195,45 @@ public class GameController {
         }
     }
 
-    private void setFinish(){
+    private void setFinish() {
         var url = "/lonelyKnight/images/finish.png";
-        if(state.board[state.rowBorder-1][state.colBorder-1] == State.KNIGHT) {
+        if (state.board[state.rowBorder - 1][state.colBorder - 1] == State.KNIGHT) {
             url = "/lonelyKnight/images/finishBorder.png";
         }
         ImageView finish = new ImageView(url);
         finish.setFitHeight(responsiveSize("height"));
         finish.setFitWidth(responsiveSize("width"));
         finish.setOnMouseClicked(this::moveKnight);
-        grid.add(finish,state.colBorder-1,state.rowBorder-1);
+        grid.add(finish, state.colBorder - 1, state.rowBorder - 1);
     }
 
-    private int responsiveSize(String whatToCalc){
+    private int responsiveSize(String whatToCalc) {
 
         int defVal = 75;
 
-        if(whatToCalc.equals("width")){
-            if(grid.getWidth() == 0){
+        if (whatToCalc.equals("width")) {
+            if (grid.getWidth() == 0) {
                 return defVal;
             }
-            return (int)grid.getWidth()/grid.getRowCount();
+            return (int) grid.getWidth() / grid.getRowCount();
         }
 
         if (whatToCalc.equals("height")) {
-            if(grid.getHeight() == 0){
+            if (grid.getHeight() == 0) {
                 return defVal;
             }
-            return (int)grid.getHeight()/grid.getColumnCount();
+            return (int) grid.getHeight() / grid.getColumnCount();
         }
 
         return defVal;
     }
 
 
-    private void moveKnight(javafx.scene.input.MouseEvent event){
-        var source = (Node)event.getSource();
+    private void moveKnight(javafx.scene.input.MouseEvent event) {
+        var source = (Node) event.getSource();
         var row = GridPane.getRowIndex(source);
         var col = GridPane.getColumnIndex(source);
-        state.moveKnight(new Position(row,col));
+        state.moveKnight(new Position(row, col));
 
         stopwatch.start();
         setFeedBackLabel("Keep going you got this!");
@@ -186,11 +244,13 @@ public class GameController {
         printBoard();
     }
 
-    private void isGameOver(){
-        if(state.isOver()){
+    private void isGameOver() {
+        if (state.isOver()) {
             grid.setDisable(true);
             stopwatch.stop();
             setFeedBackLabel("Congratulations! You beat the game!");
+            solved = true;
+            saveData();
         }
     }
 
