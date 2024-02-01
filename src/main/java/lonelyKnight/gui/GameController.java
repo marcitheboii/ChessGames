@@ -178,6 +178,7 @@ public class GameController {
         state.moveKnight(new Position(row,col));
 
         stopwatch.start();
+        setFeedBackLabel("Keep going you got this!");
 
         steps.set(steps.get() + 1);
 

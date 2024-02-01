@@ -56,6 +56,7 @@ public class GameController {
 
     @FXML
     private void initialize(){
+        setFeedBackLabel("Start by moving a knight or by starting the timer!!");
         stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         state = new GameState();

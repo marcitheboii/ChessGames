@@ -48,6 +48,7 @@ public class GameController {
     @FXML
     private void initialize(){
         stepLabel.textProperty().bind(steps.asString());
+        setFeedBackLabel("Start by moving the knight or by starting the timer!!");
         updateTimer();
         state = new GameState();
         printBoard();
@@ -163,6 +164,7 @@ public class GameController {
 
         stopwatch.start();
         steps.set(steps.get()+1);
+        setFeedBackLabel("Keep going you got this!");
 
         isGameOver();
         printBoard();
