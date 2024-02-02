@@ -87,6 +87,7 @@ public class GameController {
                 FileWriter fileWriter = new FileWriter(myObj);
                 fileWriter.write(scoreboard.toString());
                 fileWriter.close();
+                scanner.close();
             } else {
                 FileWriter fileWriter = new FileWriter(myObj);
                 JSONArray scoreBoard = new JSONArray();

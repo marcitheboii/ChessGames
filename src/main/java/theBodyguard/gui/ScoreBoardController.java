@@ -74,9 +74,11 @@ public class ScoreBoardController {
     @FXML
     private TableColumn<rowData, String> created;
 
+    private final File myObj = new File("src/main/resources/theBodyguard/scoreboard.json");
+
     @FXML
     private void initialize() {
-        File myObj = new File("src/main/resources/theBodyguard/scoreboard.json");
+        tableView.getItems().clear();
 
         if (myObj.exists()) {
             tableView.setId("my-table");
@@ -102,10 +104,17 @@ public class ScoreBoardController {
 
                 tableView.setItems(observableResult);
 
+                scanner.close();
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void delScoreBoard() {
+        myObj.delete();
+        initialize();
     }
 
     public void backToGame(final ActionEvent actionEvent) throws IOException {
