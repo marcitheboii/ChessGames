@@ -12,3 +12,7 @@
 .nextPlayer{
     -fx-background-color: rgba(77, 180, 54, 0.1) !important;
 }
+
+#my-table .table-column {
+    -fx-alignment: CENTER;
+}

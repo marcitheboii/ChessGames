@@ -145,7 +145,7 @@ public class GameController {
         drawKnight();
     }
 
-    public void startTimer(final ActionEvent actionEvent) throws IOException {
+    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/scoreboard.fxml"));
         Parent root = loader.load();

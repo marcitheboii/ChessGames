@@ -19,13 +19,20 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.tinylog.Logger;
 import startApp.Position;
 import startApp.Stopwatch;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameController {
 
@@ -50,15 +57,62 @@ public class GameController {
     @FXML
     private javafx.scene.control.Label stepLabel;
 
+    private boolean solved;
+
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     @FXML
     private void initialize(){
+        solved = false;
         setFeedBackLabel("Start by moving a bishop or by starting the timer!!");
         stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         state = new GameState();
         printBoard();
+    }
+
+    public void saveData() {
+        try {
+
+            File myObj = new File("src/main/resources/eightBishops/scoreboard.json");
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+
+            if (myObj.exists()) {
+                Scanner scanner = new Scanner(myObj);
+                JSONArray scoreboard = new JSONArray(scanner.nextLine());
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreboard.put(newScore);
+
+                FileWriter fileWriter = new FileWriter(myObj);
+                fileWriter.write(scoreboard.toString());
+                fileWriter.close();
+            } else {
+                FileWriter fileWriter = new FileWriter(myObj);
+                JSONArray scoreBoard = new JSONArray();
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreBoard.put(newScore);
+
+                fileWriter.write(scoreBoard.toString());
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void updateTimer() {
@@ -79,8 +133,12 @@ public class GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void startTimer(){
-        stopwatch.start();
+    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/eightBishops/scoreboard.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void openHelp(final ActionEvent actionEvent) throws IOException {
@@ -157,8 +215,9 @@ public class GameController {
         stopwatch.start();
         steps.set(steps.get() + 1 );
 
-        isGameover();
+
         printBoard();
+        isGameover();
     }
 
     private void selectClick(javafx.scene.input.MouseEvent event){
@@ -199,9 +258,11 @@ public class GameController {
         int counter = 0;
 
         if(state.goalTest()){
+            solved = true;
             stopwatch.stop();
             setFeedBackLabel("CONGRATULATIONS! You beat the game!");
             Logger.trace("CONGRATULATIONS!!");
+            saveData();
             return true;
         }
 
@@ -221,6 +282,7 @@ public class GameController {
             stopwatch.stop();
             setFeedBackLabel("No more moves for: " +state.nextPlayer + " !");
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
+            saveData();
             return true;
         }
         return false;

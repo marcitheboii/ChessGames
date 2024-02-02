@@ -9,3 +9,7 @@
 .legal{
     -fx-background-color: rgba(255, 229, 0, 0.72) !important;
 }
+
+#my-table .table-column {
+    -fx-alignment: CENTER;
+}

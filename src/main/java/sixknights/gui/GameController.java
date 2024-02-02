@@ -18,15 +18,22 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.tinylog.Logger;
 import sixknights.state.State;
 import sixknights.state.GameState;
 import startApp.Position;
 import startApp.Stopwatch;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameController {
 
@@ -54,13 +61,60 @@ public class GameController {
 
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
+    private boolean solved;
+
     @FXML
     private void initialize(){
+        solved = false;
         setFeedBackLabel("Start by moving a knight or by starting the timer!!");
         stepLabel.textProperty().bind(steps.asString());
         updateTimer();
         state = new GameState();
         printBoard();
+    }
+
+    public void saveData() {
+        try {
+
+            File myObj = new File("src/main/resources/sixKnights/scoreboard.json");
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formattedDateTime = now.format(formatter);
+
+            if (myObj.exists()) {
+                Scanner scanner = new Scanner(myObj);
+                JSONArray scoreboard = new JSONArray(scanner.nextLine());
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreboard.put(newScore);
+
+                FileWriter fileWriter = new FileWriter(myObj);
+                fileWriter.write(scoreboard.toString());
+                fileWriter.close();
+            } else {
+                FileWriter fileWriter = new FileWriter(myObj);
+                JSONArray scoreBoard = new JSONArray();
+
+                JSONObject newScore = new JSONObject();
+                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
+                newScore.put("Steps", steps.getValue());
+                newScore.put("Date", formattedDateTime);
+                newScore.put("Solved", solved);
+
+                scoreBoard.put(newScore);
+
+                fileWriter.write(scoreBoard.toString());
+                fileWriter.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void updateTimer() {
@@ -81,8 +135,12 @@ public class GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void startTimer(){
-        stopwatch.start();
+    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sixKnights/scoreboard.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void openHelp(final ActionEvent actionEvent) throws IOException {
@@ -105,7 +163,6 @@ public class GameController {
      * A játéktáblát benépesítő függvény, újrarajzolja az eltárolt állapot alapján a huszárok helyét.
      */
     private void printBoard(){
-        isGameOver();
         grid.getChildren().clear();
 
         setFeedBackLabel("Next player: "+state.nextPlayer);
@@ -190,6 +247,7 @@ public class GameController {
         Logger.trace("Move to (" + row + "," + col + ")");
         state.movePiece(selected,new Position(row,col));
         printBoard();
+        isGameOver();
 
         stopwatch.start();
         steps.set(steps.get()+1);
@@ -246,11 +304,14 @@ public class GameController {
             setFeedBackLabel("YOU LOST! No more moves for: " +state.nextPlayer+ " !");
             Logger.trace("GAME OVER!\n No more moves for: " +state.nextPlayer+" !");
             grid.setDisable(true);
+            saveData();
             return true;
         }
 
         if (state.goalTest()){
+            solved = true;
             setFeedBackLabel("CONGRATULATIONS! You beat the game! ");
+            saveData();
         }
         return false;
     }

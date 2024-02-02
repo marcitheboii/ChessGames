@@ -1,4 +1,4 @@
-package lonelyKnight.gui;
+package theBodyguard.gui;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -76,7 +76,7 @@ public class ScoreBoardController {
 
     @FXML
     private void initialize() {
-        File myObj = new File("src/main/resources/lonelyKnight/scoreboard.json");
+        File myObj = new File("src/main/resources/theBodyguard/scoreboard.json");
 
         if (myObj.exists()) {
             tableView.setId("my-table");
@@ -110,7 +110,7 @@ public class ScoreBoardController {
 
     public void backToGame(final ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/ui.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/theBodyguard/ui.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
         stage.show();

@@ -36,7 +36,7 @@
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" onAction="#startTimer" text="Start Timer">
+            <Button mnemonicParsing="false" onAction="#openScoreboard" text="Scoreboard">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
