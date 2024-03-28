@@ -66,49 +66,9 @@ public class GameController {
     }
 
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/lonelyKnight/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("lonelyKnight",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
+
 
     private void updateTimer() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
@@ -176,7 +136,7 @@ public class GameController {
     private void drawKnight() {
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/lonelyKnight/images/whiteKnight.png");
+        ImageView knight = new ImageView("/images/dark_knight_outline.png");
         knight.setFitHeight(60);
         knight.setFitWidth(60);
         grid.add(knight, knightPos.getCol(), knightPos.getRow());
@@ -197,9 +157,9 @@ public class GameController {
     }
 
     private void setFinish() {
-        var url = "/lonelyKnight/images/finish.png";
+        var url = "/images/finish.png";
         if (state.board[state.rowBorder - 1][state.colBorder - 1] == State.KNIGHT) {
-            url = "/lonelyKnight/images/finishBorder.png";
+            url = "/images/finishBorder.png";
         }
         ImageView finish = new ImageView(url);
         finish.setFitHeight(responsiveSize("height"));

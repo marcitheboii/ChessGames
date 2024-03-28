@@ -74,48 +74,7 @@ public class GameController {
     }
 
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/sixKnights/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("sixKnights",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
 
     private void updateTimer() {
@@ -190,7 +149,7 @@ public class GameController {
 
     private void addWhiteKnight(int row, int col){
         Node whiteBishopNode = board[row][col];
-        ImageView white_k = new ImageView("/sixKnights/images/whiteKnight.png");
+        ImageView white_k = new ImageView("/images/dark_knight_outline.png");
         white_k.setFitHeight(nodeHeight);
         white_k.setFitWidth(nodeWidth);
         if(state.nextPlayer == State.WHITE) {
@@ -204,7 +163,7 @@ public class GameController {
 
     private void addBlackKnight(int row, int col){
         Node blackBishopNode = board[row][col];
-        ImageView black_k = new ImageView("/sixKnights/images/blackKnight.png");
+        ImageView black_k = new ImageView("/images/dark_knight_filled.png");
         black_k.setFitHeight(nodeHeight);
         black_k.setFitWidth(nodeWidth);
         if(state.nextPlayer == State.BLACK) {

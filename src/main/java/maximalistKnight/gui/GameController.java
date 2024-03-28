@@ -64,48 +64,7 @@ public class GameController {
         printBoard();
     }
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/maximalistKnight/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("maximalistKnight",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
 
     private void updateTimer() {
@@ -168,7 +127,7 @@ public class GameController {
         for (var row = 0; row < grid.getRowCount(); row++) {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.HAS_BEEN){
-                    ImageView has_been = new ImageView("/maximalistKnight/images/has_been.png");
+                    ImageView has_been = new ImageView("/images/has_been.png");
                     has_been.setFitHeight(responsiveSize("height")-30);
                     has_been.setFitWidth(responsiveSize("width")-30);
                     grid.add(has_been, col, row);
@@ -193,7 +152,7 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/maximalistKnight/images/blackKnight.png");
+        ImageView knight = new ImageView("/images/dark_knight_filled.png");
         knight.setFitHeight(responsiveSize("height")-30);
         knight.setFitWidth(responsiveSize("size")-30);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());

@@ -1,11 +1,12 @@
 package eightBishops.state;
 
+import startApp.GameModel;
 import startApp.Position;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameState {
+public class GameState extends GameModel {
 
     public final int rowBorder = 5;
 

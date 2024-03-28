@@ -73,48 +73,7 @@ public class GameController {
         timeline.play();
     }
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/tightGame/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("tightGame",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
 
 
@@ -178,7 +137,7 @@ public class GameController {
 
     private void addBishop(int row,int col){
 
-        ImageView bishop = new ImageView("/tightGame/images/bishop.png");
+        ImageView bishop = new ImageView("/images/dark_bishop_outline.png");
         bishop.setFitHeight(100);
         bishop.setFitWidth(100);
         grid.add(bishop,col,row);
@@ -190,7 +149,7 @@ public class GameController {
 
     private void addRook(int row, int col){
 
-        ImageView rook = new ImageView("/tightGame/images/rook.png");
+        ImageView rook = new ImageView("/images/dark_rook_outline.png");
         rook.setFitHeight(100);
         rook.setFitWidth(100);
         grid.add(rook,col,row);
@@ -202,7 +161,7 @@ public class GameController {
 
     private void addKing(int row, int col){
 
-        ImageView king = new ImageView("/tightGame/images/king.png");
+        ImageView king = new ImageView("/images/dark_king_filled.png");
         king.setFitHeight(100);
         king.setFitWidth(100);
         grid.add(king,col,row);

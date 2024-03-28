@@ -72,48 +72,7 @@ public class GameController {
     }
 
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/eightBishops/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("eightBishops",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
 
     private void updateTimer() {
@@ -180,7 +139,7 @@ public class GameController {
 
     private void addWhiteBishop(int row,int col){
         Node whiteBishopNode = board[row][col];
-        ImageView whiteBishop = new ImageView("/eightBishops/images/whiteBishop2.png");
+        ImageView whiteBishop = new ImageView("/images/dark_bishop_outline.png");
         whiteBishop.setFitHeight(100);
         whiteBishop.setFitWidth(100);
         if(state.nextPlayer == State.WHITE) {
@@ -194,7 +153,7 @@ public class GameController {
 
     private void addBlackBishop(int row, int col){
         Node blackBishopNode = board[row][col];
-        ImageView blackBishop = new ImageView("/eightBishops/images/blackBishop2.png");
+        ImageView blackBishop = new ImageView("/images/dark_bishop_filled.png");
         blackBishop.setFitHeight(100);
         blackBishop.setFitWidth(100);
         if(state.nextPlayer == State.BLACK) {

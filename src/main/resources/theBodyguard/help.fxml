@@ -13,7 +13,7 @@
     <children>
         <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../theBodyguard/images/finish.png" />
+                <Image url="@../images/finish.png" />
             </image>
         </ImageView>
         <Pane layoutX="54.0" layoutY="41.0" prefHeight="719.0" prefWidth="693.0" style="-fx-background-color: white;">
@@ -45,7 +45,7 @@
                 </Label>
                 <ImageView fitHeight="234.0" fitWidth="349.0" layoutX="406.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/about.png" />
+                        <Image url="@../images/TB_goal_state.png" />
                     </image>
                 </ImageView>
                 <Label layoutX="406.0" layoutY="318.0" prefHeight="58.0" prefWidth="176.0" text="Goal State:">
@@ -55,7 +55,7 @@
                 </Label>
                 <ImageView fitHeight="234.0" fitWidth="235.0" layoutX="82.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/opening.png" />
+                        <Image url="@../images/TB_opening.png" />
                     </image>
                 </ImageView>
                 <Button layoutX="573.0" layoutY="648.0" mnemonicParsing="false" onAction="#backToGame" text="Understood!">

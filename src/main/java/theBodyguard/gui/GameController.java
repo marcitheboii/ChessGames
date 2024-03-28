@@ -74,48 +74,7 @@ public class GameController {
     }
 
     public void saveData() {
-        try {
-
-            File myObj = new File("src/main/resources/theBodyguard/scoreboard.json");
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String formattedDateTime = now.format(formatter);
-
-            if (myObj.exists()) {
-                Scanner scanner = new Scanner(myObj);
-                JSONArray scoreboard = new JSONArray(scanner.nextLine());
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreboard.put(newScore);
-
-                FileWriter fileWriter = new FileWriter(myObj);
-                fileWriter.write(scoreboard.toString());
-                fileWriter.close();
-                scanner.close();
-            } else {
-                FileWriter fileWriter = new FileWriter(myObj);
-                JSONArray scoreBoard = new JSONArray();
-
-                JSONObject newScore = new JSONObject();
-                newScore.put("Time", stopwatch.getElapsedTimeFormatted());
-                newScore.put("Steps", steps.getValue());
-                newScore.put("Date", formattedDateTime);
-                newScore.put("Solved", solved);
-
-                scoreBoard.put(newScore);
-
-                fileWriter.write(scoreBoard.toString());
-                fileWriter.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        state.saveData("theBodyguard",stopwatch.getElapsedTimeFormatted(),steps.getValue(),solved);
     }
 
     private void setFeedBackLabel(String text){
@@ -230,7 +189,7 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightPos();
 
-        ImageView knight = new ImageView("/theBodyguard/images/blackKnight.png");
+        ImageView knight = new ImageView("/images/dark_knight_filled.png");
         knight.setFitHeight(60);
         knight.setFitWidth(60);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
@@ -238,20 +197,20 @@ public class GameController {
 
     private void drawKing(){
         Position KingPos = state.getKingPos();
-        ImageView king = new ImageView("/theBodyguard/images/king.png");
+        ImageView king = new ImageView("/images/dark_king_filled.png");
         king.setFitHeight(60);
         king.setFitWidth(60);
         grid.add(king,KingPos.getCol(),KingPos.getRow());
     }
 
     private void drawFinish(){
-        var url = "/theBodyguard/images/finish.png";
+        var url = "/images/finish.png";
 
         Position king = state.getKingPos();
         Position knight = state.getKnightPos();
         Position finishPos = new Position(state.rowBorder-1, state.colBorder-2);
         if(finishPos.equals(king) ||finishPos.equals(knight)) {
-            url = "/theBodyguard/images/finishBorder.png";
+            url = "/images/finishBorder.png";
         }
 
         ImageView finish = new ImageView(url);

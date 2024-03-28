@@ -22,7 +22,7 @@ public class GameApplication extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/landingPage/ui.fxml")));
         stage.setTitle("Chess Games");
-        stage.getIcons().add(new Image(Objects.requireNonNull(GameApplication.class.getResourceAsStream("/landingPage/images/icon.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(GameApplication.class.getResourceAsStream("/images/icon.png"))));
         stage.setResizable(false);
         Scene scene = new Scene(root);
         stage.setScene(scene);

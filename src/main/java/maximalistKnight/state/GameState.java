@@ -1,12 +1,22 @@
 package maximalistKnight.state;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.tinylog.Logger;
+import startApp.GameModel;
 import startApp.Position;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
-public class GameState {
+public class GameState extends GameModel {
 
         public final int rowBorder = 6;
 

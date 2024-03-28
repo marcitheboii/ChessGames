@@ -36,7 +36,7 @@ public class LandingPageController {
     }
 
     private void setNavBar(){
-        ImageView icon = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/landingPage/images/icon.png")).toExternalForm());
+        ImageView icon = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/icon.png")).toExternalForm());
         icon.setFitWidth(200);
         icon.setFitHeight(200);
         navBar.getChildren().add(icon);
@@ -45,27 +45,27 @@ public class LandingPageController {
 
     private void setImages(){
 
-        ImageView lonelyKnight = new ImageView((Objects.requireNonNull(LandingPageController.class.getResource("/lonelyKnight/images/opening.png"))).toExternalForm());
+        ImageView lonelyKnight = new ImageView((Objects.requireNonNull(LandingPageController.class.getResource("/images/LK_opening.png"))).toExternalForm());
         lonelyKnightImage.setImage(lonelyKnight.getImage());
         lonelyKnightImage.setOnMouseClicked(this::handleGoToLonelyKnight);
 
-        ImageView maximalistKnight = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/maximalistKnight/images/opening.png")).toExternalForm());
+        ImageView maximalistKnight = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/MK_opening.png")).toExternalForm());
         maximalistKnightImage.setImage(maximalistKnight.getImage());
         maximalistKnightImage.setOnMouseClicked(this::handleGoToMaximalistKnight);
 
-        ImageView eightBishops = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/eightBishops/images/opening.png")).toExternalForm());
+        ImageView eightBishops = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/EB_opening.png")).toExternalForm());
         eightBishopsImage.setImage(eightBishops.getImage());
         eightBishopsImage.setOnMouseClicked(this::handleGoToEightBishops);
 
-        ImageView sixKnights = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/sixKnights/images/opening.png")).toExternalForm());
+        ImageView sixKnights = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/SK_opening.png")).toExternalForm());
         sixKnightsImage.setImage(sixKnights.getImage());
         sixKnightsImage.setOnMouseClicked(this::handleGoToSixKnights);
 
-        ImageView bodyGuard = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/theBodyguard/images/opening.png")).toExternalForm());
+        ImageView bodyGuard = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/TB_opening.png")).toExternalForm());
         bodyGuardImage.setImage(bodyGuard.getImage());
         bodyGuardImage.setOnMouseClicked(this::handleGoToTheBodyguard);
 
-        ImageView tightGame = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/tightGame/images/opening.png")).toExternalForm());
+        ImageView tightGame = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/TG_opening.png")).toExternalForm());
         tightGameImage.setImage(tightGame.getImage());
         tightGameImage.setOnMouseClicked(this::handleGoToTightGame);
 

@@ -13,7 +13,7 @@
     <children>
         <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../theBodyguard/images/finish.png" />
+                <Image url="@../images/finish.png" />
             </image>
         </ImageView>
         <Pane layoutX="54.0" layoutY="41.0" prefHeight="719.0" prefWidth="693.0" style="-fx-background-color: white;">

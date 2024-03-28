@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lonelyKnight/images/finish.png" />
+            <Image url="@../images/finish.png" />
          </image>
       </ImageView>
       <Pane layoutX="54.0" layoutY="41.0" prefHeight="719.0" prefWidth="693.0" style="-fx-background-color: white;">
@@ -45,7 +45,7 @@
             </Label>
             <ImageView fitHeight="234.0" fitWidth="349.0" layoutX="407.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/about.png" />
+                  <Image url="@../images/TG_goal_state.png" />
                </image>
             </ImageView>
             <Label layoutX="407.0" layoutY="298.0" prefHeight="58.0" prefWidth="176.0" text="Goal State:">
@@ -55,7 +55,7 @@
             </Label>
             <ImageView fitHeight="234.0" fitWidth="235.0" layoutX="82.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/opening.png" />
+                  <Image url="@../images/TG_opening.png" />
                </image>
             </ImageView>
             <Button layoutX="555.0" layoutY="653.0" mnemonicParsing="false" onAction="#backToGame" text="Understood!">
