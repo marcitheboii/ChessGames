@@ -1,4 +1,4 @@
-package eightBishops.gui.maximalistKnight.state;
+package maximalistKnight.state;
 
 import org.tinylog.Logger;
 import startApp.GameModel;

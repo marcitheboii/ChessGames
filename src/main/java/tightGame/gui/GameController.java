@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -81,20 +82,12 @@ public class GameController extends startApp.GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tightGame/scoreboard.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openScoreboard(MouseEvent event) {
+        openThis("/tightGame/scoreboard.fxml",event);
     }
 
-    public void openHelp(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tightGame/help.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openHelp(MouseEvent event) {
+        openThis("/tightGame/help.fxml",event);
     }
 
     private Node lastSelected;
@@ -242,11 +235,7 @@ public class GameController extends startApp.GameController {
         }
         return false;
     }
-    public void backToMenu(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void backToMenu(MouseEvent event) {
+        openThis("/landingPage/ui.fxml",event);
     }
 }

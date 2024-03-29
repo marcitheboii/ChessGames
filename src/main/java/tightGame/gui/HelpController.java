@@ -5,16 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import startApp.GameController;
 
 import java.io.IOException;
 
-public class HelpController {
-    public void backToGame(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tightGame/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+public class HelpController extends GameController {
+    public void backToGame(MouseEvent event) {
+        openThis("/tightGame/ui.fxml",event);
     }
 }

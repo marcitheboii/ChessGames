@@ -98,20 +98,12 @@ public class GameController extends startApp.GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sixKnights/scoreboard.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openScoreboard(MouseEvent event) {
+        openThis("/sixKnights/scoreboard.fxml",event);
     }
 
-    public void openHelp(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sixKnights/help.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openHelp(MouseEvent event)  {
+        openThis("/sixKnights/help.fxml",event);
     }
 
     public void resetGame(){
@@ -279,11 +271,7 @@ public class GameController extends startApp.GameController {
         return false;
     }
 
-    public void backToMenu(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void backToMenu(MouseEvent event) {
+        openThis("/landingPage/ui.fxml",event);
     }
 }

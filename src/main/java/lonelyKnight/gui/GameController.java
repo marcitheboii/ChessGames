@@ -49,6 +49,15 @@ public class GameController extends startApp.GameController {
 
     private final SettingsModel settings = new SettingsModel();
 
+    @FXML
+    private ImageView menu;
+    @FXML
+    private ImageView scoreboard;
+    @FXML
+    private ImageView reset;
+    @FXML
+    private ImageView help;
+
 
 
     @FXML
@@ -102,20 +111,16 @@ public class GameController extends startApp.GameController {
         drawKnight();
     }
 
-    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/scoreboard.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openScoreboard(javafx.scene.input.MouseEvent event) {
+        openThis("/lonelyKnight/scoreboard.fxml",event);
     }
 
-    public void openHelp(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/lonelyKnight/help.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void backToMenu(javafx.scene.input.MouseEvent event) {
+        openThis("/landingPage/ui.fxml",event);
+    }
+
+    public void openHelp(javafx.scene.input.MouseEvent event) {
+        openThis("/lonelyKnight/help.fxml",event);
     }
 
     private void colorChessBoard() {
@@ -210,13 +215,4 @@ public class GameController extends startApp.GameController {
             saveData();
         }
     }
-
-    public void backToMenu(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
 }

@@ -33,11 +33,6 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Button layoutX="573.0" layoutY="648.0" mnemonicParsing="false" onAction="#backToGame" text="Understood!">
-                    <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </padding>
-                </Button>
                 <Label layoutX="104.0" layoutY="175.0" prefHeight="58.0" prefWidth="521.0" text="2. In the top row there are 4 dark bishops">
                     <font>
                         <Font size="18.0" />
@@ -63,6 +58,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="575.0" layoutY="570.0" onMouseClicked="#backToGame" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/okay.png" />
+               </image>
+            </ImageView>
             </children>
         </Pane>
     </children>

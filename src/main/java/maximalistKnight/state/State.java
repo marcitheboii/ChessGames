@@ -1,4 +1,4 @@
-package eightBishops.gui.maximalistKnight.state;
+package maximalistKnight.state;
 
 public enum State {
     KNIGHT,

@@ -1,4 +1,4 @@
-package eightBishops.gui;
+package maximalistKnight.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +13,6 @@ import java.io.IOException;
 
 public class HelpController extends GameController {
     public void backToGame(MouseEvent event) {
-        openThis("/eightBishops/ui.fxml",event);
+        openThis("/maximalistKnight/ui.fxml",event);
     }
 }

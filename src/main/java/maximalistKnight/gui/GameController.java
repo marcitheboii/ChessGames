@@ -1,6 +1,7 @@
-package eightBishops.gui.maximalistKnight.gui;
+package maximalistKnight.gui;
 
-import eightBishops.gui.maximalistKnight.state.State;
+import javafx.scene.input.MouseEvent;
+import maximalistKnight.state.State;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -17,7 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import eightBishops.gui.maximalistKnight.state.GameState;
+import maximalistKnight.state.GameState;
 import org.tinylog.Logger;
 import settings.SettingsModel;
 import startApp.Position;
@@ -82,20 +83,12 @@ public class GameController extends startApp.GameController {
         Platform.runLater(() -> stopWatch.setText(String.format(stopwatch.getElapsedTimeFormatted())));
     }
 
-    public void openScoreboard(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/maximalistKnight/scoreboard.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openScoreboard(MouseEvent event) {
+        openThis("/maximalistKnight/scoreboard.fxml",event);
     }
 
-    public void openHelp(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/maximalistKnight/help.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void openHelp(MouseEvent event) {
+        openThis("/maximalistKnight/help.fxml",event);
     }
 
     public void resetGame(){
@@ -207,12 +200,8 @@ public class GameController extends startApp.GameController {
         }
     }
 
-    public void backToMenu(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void backToMenu(MouseEvent event){
+        openThis("/landingPage/ui.fxml",event);
     }
 
     private int responsiveSize(String whatToCalc){

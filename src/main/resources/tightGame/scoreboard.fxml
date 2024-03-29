@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@ui.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tightGame.gui.ScoreBoardController">
    <center>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -32,22 +34,26 @@
          </children>
       </HBox>
    </top>
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-             <Button mnemonicParsing="false" onAction="#delScoreBoard" style="-fx-border-color: red; -fx-border-width: 3;" text="Delete Scoarboard Data">
-                 <HBox.margin>
-                     <Insets right="500.0" />
-                 </HBox.margin>
-             </Button>
-            <Button mnemonicParsing="false" onAction="#backToGame" text="Back">
-               <HBox.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane prefHeight="84.0" prefWidth="800.0">
+                    <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="74.0" layoutY="25.0" onMouseClicked="#delScoreBoard" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/permaDelete.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="672.0" layoutY="25.0" onMouseClicked="#backToGame" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/okay.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </children>
+        </HBox>
+    </bottom>
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>

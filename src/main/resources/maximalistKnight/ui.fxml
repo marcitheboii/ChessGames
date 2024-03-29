@@ -6,60 +6,66 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eightBishops.gui.maximalistKnight.gui.GameController">
-   <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#backToMenu" text="Main Menu">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#openScoreboard" text="Scoreboard">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </Button>
-             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                 <children>
-                     <Label alignment="CENTER" prefHeight="34.0" prefWidth="72.0" text="Time:">
-                         <font>
-                             <Font size="18.0" />
-                         </font>
-                     </Label>
-                     <Label fx:id="stopWatch" alignment="CENTER" prefHeight="25.0" prefWidth="154.0" text="00:00:000">
-                         <font>
-                             <Font size="20.0" />
-                         </font>
-                     </Label>
-                 </children>
-             </VBox>
-             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                 <children>
-                     <Label alignment="CENTER" prefHeight="38.0" prefWidth="72.0" text="Steps:" VBox.vgrow="SOMETIMES">
-                         <font>
-                             <Font size="18.0" />
-                         </font>
-                     </Label>
-                     <Label fx:id="stepLabel" alignment="CENTER" prefHeight="30.0" prefWidth="97.0" text="0" VBox.vgrow="SOMETIMES">
-                         <font>
-                             <Font size="20.0" />
-                         </font>
-                     </Label>
-                 </children>
-             </VBox>
-            <Button mnemonicParsing="false" onAction="#resetGame" text="Reset Game">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#openHelp" text="Help">
-               <HBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </HBox.margin>
-            </Button>
-         </children></HBox>
-   </top>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maximalistKnight.gui.GameController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Pane prefHeight="100.0" prefWidth="258.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <ImageView fx:id="menu" fitHeight="50.0" fitWidth="50.0" layoutX="79.0" layoutY="25.0" nodeOrientation="INHERIT" onMouseClicked="#backToMenu" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/menu.png" />
+                            </image></ImageView>
+                        <ImageView fx:id="scoreboard" fitHeight="50.0" fitWidth="50.0" layoutX="185.0" layoutY="25.0" onMouseClicked="#openScoreboard" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/scoreboard.png" />
+                            </image></ImageView>
+                    </children>
+                </Pane>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="72.0" text="Time:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="stopWatch" alignment="CENTER" prefHeight="25.0" prefWidth="154.0" text="00:00:000">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="72.0" text="Steps:" VBox.vgrow="SOMETIMES">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="stepLabel" alignment="CENTER" prefHeight="30.0" prefWidth="97.0" text="0" VBox.vgrow="SOMETIMES">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <Pane prefHeight="100.0" prefWidth="265.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <ImageView fx:id="reset" fitHeight="50.0" fitWidth="50.0" layoutX="66.0" layoutY="25.0" onMouseClicked="#resetGame" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/restart.png" />
+                            </image></ImageView>
+                        <ImageView fx:id="help" fitHeight="50.0" fitWidth="50.0" layoutX="200.0" layoutY="25.0" onMouseClicked="#openHelp" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/help.png" />
+                            </image></ImageView>
+                    </children>
+                </Pane>
+            </children></HBox>
+    </top>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>

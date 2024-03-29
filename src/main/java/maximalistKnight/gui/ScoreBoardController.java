@@ -1,4 +1,4 @@
-package eightBishops.gui.maximalistKnight.gui;
+package maximalistKnight.gui;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,9 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import startApp.GameController;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ScoreBoardController {
+public class ScoreBoardController extends GameController {
     public static class rowData {
         private final SimpleStringProperty time;
         private final SimpleIntegerProperty steps;
@@ -110,16 +112,12 @@ public class ScoreBoardController {
         }
     }
 
-    public void delScoreBoard() {
+    public void delScoreBoard(MouseEvent event) {
         myObj.delete();
         initialize();
     }
 
-    public void backToGame(final ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/maximalistKnight/ui.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void backToGame(MouseEvent event) {
+        openThis("/maximalistKnight/ui.fxml",event);
     }
 }
