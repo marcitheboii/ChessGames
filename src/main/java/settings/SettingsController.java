@@ -78,7 +78,6 @@ public class SettingsController {
     @FXML
     private void initialize(){
         setImages();
-        setLegalColor();
     }
 
     private void setImages(){
@@ -213,12 +212,13 @@ public class SettingsController {
         ImageView k4IMG = new ImageView((Objects.requireNonNull(LandingPageController.class.getResource("/images/"+k4_path))).toExternalForm());
         k4.setImage(k4IMG.getImage());
         k4.setOnMouseClicked(event -> setKing(k4_path, event));
+
+        legalColor.setEditable(false);
+        legalColor.setValue(model.getLegalColor());
     }
     private void setLegalColor(){
-        legalColor.setValue(model.getLegalColor());
-
+        model.setLegalColor(legalColor.getValue());
     }
-
 
     private void setDarkKnight(String path,javafx.scene.input.MouseEvent event){
         model.setDarkKnight(path);
@@ -245,6 +245,7 @@ public class SettingsController {
 
 
     public void backToMenu(javafx.scene.input.MouseEvent event) {
+        setLegalColor();
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/landingPage/ui.fxml"));

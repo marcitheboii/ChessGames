@@ -28,7 +28,7 @@ import theBodyguard.state.State;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameController {
+public class GameController extends startApp.GameController {
     @FXML
     private GridPane grid;
 
@@ -133,7 +133,7 @@ public class GameController {
         ArrayList<Position> legitMoves = state.legitKnightMoves();
         for (var pos : legitMoves) {
             StackPane overlayPane = new StackPane();
-            overlayPane.getStyleClass().add("legal");
+            overlayPane.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
             overlayPane.setOnMouseClicked(this::moveKnight);
             grid.add(overlayPane, pos.getCol(), pos.getRow());
         }
@@ -151,7 +151,7 @@ public class GameController {
         ArrayList<Position> legitMoves = state.legitKingMoves();
         for (var pos : legitMoves) {
             StackPane overlayPane = new StackPane();
-            overlayPane.getStyleClass().add("legal");
+            overlayPane.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
             overlayPane.setOnMouseClicked(this::moveKing);
             grid.add(overlayPane, pos.getCol(), pos.getRow());
         }

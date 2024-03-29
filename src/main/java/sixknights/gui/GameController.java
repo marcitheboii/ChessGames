@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameController {
+public class GameController extends startApp.GameController {
 
     @FXML
     private GridPane grid;
@@ -193,7 +193,7 @@ public class GameController {
         for (var pos : legitMoves){
             Node validNode = board[pos.getRow()][pos.getCol()];
             validNodes.add(validNode);
-            validNode.getStyleClass().add("legal");
+            validNode.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
             validNode.setOnMouseClicked(this::moveOnClick);
         }
     }
@@ -221,7 +221,7 @@ public class GameController {
      */
     private void clearValidNodes() {
         validNodes.forEach(node -> {
-            node.getStyleClass().remove("legal");
+            node.setStyle("");
             node.setOnMouseClicked(event1 -> {});
         });
     }

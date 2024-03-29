@@ -1,5 +1,7 @@
 package maximalistKnight.state;
 
+import eightBishops.gui.maximalistKnight.state.GameState;
+import eightBishops.gui.maximalistKnight.state.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import startApp.Position;

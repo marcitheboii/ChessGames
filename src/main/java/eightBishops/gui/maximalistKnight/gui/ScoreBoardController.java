@@ -1,4 +1,4 @@
-package maximalistKnight.gui;
+package eightBishops.gui.maximalistKnight.gui;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;

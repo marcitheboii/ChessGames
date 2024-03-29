@@ -40,6 +40,7 @@ public class SettingsModel {
             setWhiteBishop((String) settings.get("whiteBishop"));
             setRook((String) settings.get("rook"));
             setKing((String) settings.get("king"));
+            setLegalColor(Color.web((String) settings.get("legalColor")));
 
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -25,7 +25,7 @@ import startApp.Stopwatch;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameController {
+public class GameController extends startApp.GameController {
 
     @FXML
     private GridPane grid;
@@ -146,7 +146,7 @@ public class GameController {
 
         for (var pos : allMoves) {
             var square = new StackPane();
-            square.getStyleClass().add("legal");
+            square.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
             square.setOnMouseClicked(this::moveKnight);
             grid.add(square, pos.getCol(), pos.getRow());
         }

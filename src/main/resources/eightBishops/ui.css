@@ -6,10 +6,6 @@
     -fx-background-color: lightgrey;
 }
 
-.legal{
-    -fx-background-color: rgba(255, 229, 0, 0.72) !important;
-}
-
 .nextPlayer{
     -fx-background-color: rgba(77, 180, 54, 0.1) !important;
 }

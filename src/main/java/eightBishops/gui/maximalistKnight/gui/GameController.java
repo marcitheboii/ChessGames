@@ -1,5 +1,6 @@
-package maximalistKnight.gui;
+package eightBishops.gui.maximalistKnight.gui;
 
+import eightBishops.gui.maximalistKnight.state.State;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -16,23 +17,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import maximalistKnight.state.GameState;
-import maximalistKnight.state.State;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import eightBishops.gui.maximalistKnight.state.GameState;
 import org.tinylog.Logger;
 import settings.SettingsModel;
 import startApp.Position;
 import startApp.Stopwatch;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
-public class GameController {
+public class GameController extends startApp.GameController {
     @FXML
     private GridPane grid;
 
@@ -169,7 +162,7 @@ public class GameController {
             for (var col = 0; col < grid.getColumnCount(); col++) {
                 if(state.board[row][col] == State.CAN_GO){
                     var square = new StackPane();
-                    square.getStyleClass().add("legal");
+                    square.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
                     square.setOnMouseClicked(this::moveKnight);
                     grid.add(square, col, row);
                     board[row][col] = square;

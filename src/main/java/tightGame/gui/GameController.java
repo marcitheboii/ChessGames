@@ -26,7 +26,7 @@ import tightGame.state.State;
 
 import java.io.IOException;
 
-public class GameController {
+public class GameController extends startApp.GameController {
     @FXML
     private GridPane grid;
 
@@ -211,7 +211,7 @@ public class GameController {
     private void setValidNode(Position legitMove){
         grid.getChildren().remove(lastValid);
         Node valid = new StackPane();
-        valid.getStyleClass().add("legal");
+        valid.setStyle("-fx-background-color: "+toCssColor(settings.getLegalColor())+";");
         valid.setOnMouseClicked(this::moveOnClick);
         lastValid = valid;
         grid.add(valid,legitMove.getCol(),legitMove.getRow());
