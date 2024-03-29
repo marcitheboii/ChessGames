@@ -18,18 +18,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lonelyKnight.state.GameState;
 import lonelyKnight.state.State;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import startApp.Position;
+import settings.SettingsModel;
 import startApp.Stopwatch;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameController {
 
@@ -52,6 +46,8 @@ public class GameController {
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     private Boolean solved;
+
+    private final SettingsModel settings = new SettingsModel();
 
 
 
@@ -136,7 +132,7 @@ public class GameController {
     private void drawKnight() {
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/images/dark_knight_outline.png");
+        ImageView knight = new ImageView("/images/"+settings.getDarkKnight());
         knight.setFitHeight(60);
         knight.setFitWidth(60);
         grid.add(knight, knightPos.getCol(), knightPos.getRow());

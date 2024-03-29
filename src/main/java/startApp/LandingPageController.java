@@ -30,16 +30,20 @@ public class LandingPageController {
     private ImageView tightGameImage;
 
     @FXML
+    private ImageView settingsIcon;
+
+    @FXML
+    private ImageView icon;
+
+    @FXML
     private void initialize(){
         setNavBar();
         setImages();
     }
 
     private void setNavBar(){
-        ImageView icon = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/icon.png")).toExternalForm());
-        icon.setFitWidth(200);
-        icon.setFitHeight(200);
-        navBar.getChildren().add(icon);
+        ImageView GameIcon = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/icon.png")).toExternalForm());
+        icon.setImage(GameIcon.getImage());
 
     }
 
@@ -69,9 +73,9 @@ public class LandingPageController {
         tightGameImage.setImage(tightGame.getImage());
         tightGameImage.setOnMouseClicked(this::handleGoToTightGame);
 
-    }
-
-    private void OpenUI(String url){
+        ImageView settings = new ImageView(Objects.requireNonNull(LandingPageController.class.getResource("/images/setting.png")).toExternalForm());
+        settingsIcon.setImage(settings.getImage());
+        settingsIcon.setOnMouseClicked(this::openSettings);
 
     }
 
@@ -144,6 +148,19 @@ public class LandingPageController {
         try {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tightGame/ui.fxml"));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openSettings(javafx.scene.input.MouseEvent event) {
+        try {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/settings/settings.fxml"));
             Parent root = loader.load();
             stage.setScene(new Scene(root));
             stage.setResizable(false);

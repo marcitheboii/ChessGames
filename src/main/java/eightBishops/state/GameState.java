@@ -19,6 +19,7 @@ public class GameState extends GameModel {
 
     public GameState(){
 
+
         board = new State[rowBorder][colBorder];
 
         nextPlayer = State.WHITE;

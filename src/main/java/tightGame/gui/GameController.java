@@ -17,20 +17,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.tinylog.Logger;
+import settings.SettingsModel;
 import startApp.Position;
 import startApp.Stopwatch;
 import tightGame.state.GameState;
 import tightGame.state.State;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class GameController {
     @FXML
@@ -53,6 +47,8 @@ public class GameController {
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     private boolean solved;
+
+    private SettingsModel settings = new SettingsModel();
 
     @FXML
     private void initialize(){
@@ -137,7 +133,7 @@ public class GameController {
 
     private void addBishop(int row,int col){
 
-        ImageView bishop = new ImageView("/images/dark_bishop_outline.png");
+        ImageView bishop = new ImageView("/images/"+settings.getWhiteBishop());
         bishop.setFitHeight(100);
         bishop.setFitWidth(100);
         grid.add(bishop,col,row);
@@ -149,7 +145,7 @@ public class GameController {
 
     private void addRook(int row, int col){
 
-        ImageView rook = new ImageView("/images/dark_rook_outline.png");
+        ImageView rook = new ImageView("/images/"+settings.getRook());
         rook.setFitHeight(100);
         rook.setFitWidth(100);
         grid.add(rook,col,row);
@@ -161,7 +157,7 @@ public class GameController {
 
     private void addKing(int row, int col){
 
-        ImageView king = new ImageView("/images/dark_king_filled.png");
+        ImageView king = new ImageView("/images/"+settings.getKing());
         king.setFitHeight(100);
         king.setFitWidth(100);
         grid.add(king,col,row);

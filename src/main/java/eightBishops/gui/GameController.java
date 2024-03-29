@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.tinylog.Logger;
+import settings.SettingsModel;
 import startApp.Position;
 import startApp.Stopwatch;
 
@@ -60,6 +61,8 @@ public class GameController {
     private boolean solved;
 
     private final IntegerProperty steps = new SimpleIntegerProperty();
+
+    private SettingsModel settings = new SettingsModel();
 
     @FXML
     private void initialize(){
@@ -139,7 +142,7 @@ public class GameController {
 
     private void addWhiteBishop(int row,int col){
         Node whiteBishopNode = board[row][col];
-        ImageView whiteBishop = new ImageView("/images/dark_bishop_outline.png");
+        ImageView whiteBishop = new ImageView("/images/"+settings.getWhiteBishop());
         whiteBishop.setFitHeight(100);
         whiteBishop.setFitWidth(100);
         if(state.nextPlayer == State.WHITE) {
@@ -153,7 +156,7 @@ public class GameController {
 
     private void addBlackBishop(int row, int col){
         Node blackBishopNode = board[row][col];
-        ImageView blackBishop = new ImageView("/images/dark_bishop_filled.png");
+        ImageView blackBishop = new ImageView("/images/"+settings.getDarkBishop());
         blackBishop.setFitHeight(100);
         blackBishop.setFitWidth(100);
         if(state.nextPlayer == State.BLACK) {

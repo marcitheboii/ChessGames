@@ -18,21 +18,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.tinylog.Logger;
+import settings.SettingsModel;
 import startApp.Position;
 import startApp.Stopwatch;
 import theBodyguard.state.GameState;
 import theBodyguard.state.State;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameController {
     @FXML
@@ -52,6 +46,8 @@ public class GameController {
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     private boolean solved;
+
+    private SettingsModel settings = new SettingsModel();
 
     @FXML
     private void initialize(){
@@ -189,7 +185,7 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightPos();
 
-        ImageView knight = new ImageView("/images/dark_knight_filled.png");
+        ImageView knight = new ImageView("/images/"+settings.getDarkKnight());
         knight.setFitHeight(60);
         knight.setFitWidth(60);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());
@@ -197,7 +193,7 @@ public class GameController {
 
     private void drawKing(){
         Position KingPos = state.getKingPos();
-        ImageView king = new ImageView("/images/dark_king_filled.png");
+        ImageView king = new ImageView("/images/"+settings.getKing());
         king.setFitHeight(60);
         king.setFitWidth(60);
         grid.add(king,KingPos.getCol(),KingPos.getRow());

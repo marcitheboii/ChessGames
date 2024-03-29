@@ -21,6 +21,7 @@ import maximalistKnight.state.State;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.tinylog.Logger;
+import settings.SettingsModel;
 import startApp.Position;
 import startApp.Stopwatch;
 
@@ -53,6 +54,9 @@ public class GameController {
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     private boolean solved;
+
+    private SettingsModel settings = new SettingsModel();
+
 
     @FXML
     private void initialize(){
@@ -152,7 +156,7 @@ public class GameController {
     private void drawKnight(){
         Position knightPos = state.getKnightsPos();
 
-        ImageView knight = new ImageView("/images/dark_knight_filled.png");
+        ImageView knight = new ImageView("/images/"+settings.getDarkKnight());
         knight.setFitHeight(responsiveSize("height")-30);
         knight.setFitWidth(responsiveSize("size")-30);
         grid.add(knight,knightPos.getCol(),knightPos.getRow());

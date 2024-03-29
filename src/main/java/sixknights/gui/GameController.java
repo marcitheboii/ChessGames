@@ -21,6 +21,7 @@ import javafx.util.Duration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.tinylog.Logger;
+import settings.SettingsModel;
 import sixknights.state.State;
 import sixknights.state.GameState;
 import startApp.Position;
@@ -62,6 +63,8 @@ public class GameController {
     private final IntegerProperty steps = new SimpleIntegerProperty();
 
     private boolean solved;
+
+    private SettingsModel settings = new SettingsModel();
 
     @FXML
     private void initialize(){
@@ -149,7 +152,7 @@ public class GameController {
 
     private void addWhiteKnight(int row, int col){
         Node whiteBishopNode = board[row][col];
-        ImageView white_k = new ImageView("/images/dark_knight_outline.png");
+        ImageView white_k = new ImageView("/images/"+ settings.getWhiteKnight());
         white_k.setFitHeight(nodeHeight);
         white_k.setFitWidth(nodeWidth);
         if(state.nextPlayer == State.WHITE) {
@@ -163,7 +166,7 @@ public class GameController {
 
     private void addBlackKnight(int row, int col){
         Node blackBishopNode = board[row][col];
-        ImageView black_k = new ImageView("/images/dark_knight_filled.png");
+        ImageView black_k = new ImageView("/images/"+ settings.getDarkKnight());
         black_k.setFitHeight(nodeHeight);
         black_k.setFitWidth(nodeWidth);
         if(state.nextPlayer == State.BLACK) {
