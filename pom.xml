@@ -6,12 +6,12 @@
     <groupId>hu.unideb.inf</groupId>
     <artifactId>ChessGames</artifactId>
     <version>1.0</version>
-    <description>Szakdolgozat</description>
+    <description>Thesis</description>
     <developers>
         <developer>
             <id>tth.marci</id>
             <name>Tóth Márton Marcell</name>
-            <email>hun.nort@gmail.com</email>
+            <email>toth.marton.marcell@gmail.com</email>
             <organization>Faculty of Informatics, University of Debrecen</organization>
             <organizationUrl>https://www.inf.unideb.hu/</organizationUrl>
         </developer>
@@ -30,11 +30,6 @@
         <exec.mainClass>main.Main</exec.mainClass>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20231013</version>
-        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
