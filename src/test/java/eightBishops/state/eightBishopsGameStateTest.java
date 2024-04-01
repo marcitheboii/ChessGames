@@ -1,8 +1,10 @@
 package eightBishops.state;
 
+import games.eightBishops.state.GameState;
+import games.eightBishops.state.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import startApp.Position;
+import position.Position;
 
 import java.util.ArrayList;
 

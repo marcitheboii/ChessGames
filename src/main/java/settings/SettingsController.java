@@ -1,23 +1,12 @@
 package settings;
 
-import com.sun.tools.jconsole.JConsoleContext;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import org.w3c.dom.css.RGBColor;
-import settings.SettingsModel;
-import startApp.GameController;
-import startApp.LandingPageController;
+import games.GameController;
+import landingPage.LandingPageController;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

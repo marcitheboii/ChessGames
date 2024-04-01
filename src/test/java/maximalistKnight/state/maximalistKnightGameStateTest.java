@@ -1,8 +1,10 @@
 package maximalistKnight.state;
 
+import games.maximalistKnight.state.GameState;
+import games.maximalistKnight.state.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import startApp.Position;
+import position.Position;
 
 import java.util.ArrayList;
 

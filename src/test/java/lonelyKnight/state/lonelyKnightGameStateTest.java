@@ -1,8 +1,10 @@
 package lonelyKnight.state;
 
+import games.lonelyKnight.state.GameState;
+import games.lonelyKnight.state.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import startApp.Position;
+import position.Position;
 
 import java.util.ArrayList;
 
