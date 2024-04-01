@@ -104,28 +104,28 @@ public class SettingsController extends GameController {
     private void initialize(){
 
         //Dark Knights
-        fxmlElements.add(new FxmlElementWithPath(dk1,"dark_knight_filled.png"));
-        fxmlElements.add(new FxmlElementWithPath(dk2,"dark_knight_filled1.png"));
-        fxmlElements.add(new FxmlElementWithPath(dk3,"dark_knight_filled2.png"));
-        fxmlElements.add(new FxmlElementWithPath(dk4,"dark_knight_filled3.png"));
+        fxmlElements.add(new FxmlElementWithPath(dk1,"knight_filled.png"));
+        fxmlElements.add(new FxmlElementWithPath(dk2,"knight_filled1.png"));
+        fxmlElements.add(new FxmlElementWithPath(dk3,"knight_filled2.png"));
+        fxmlElements.add(new FxmlElementWithPath(dk4,"knight_filled3.png"));
 
         //White Knights
-        fxmlElements.add(new FxmlElementWithPath(wk1,"dark_knight_outline.png"));
-        fxmlElements.add(new FxmlElementWithPath(wk2,"dark_knight_outline1.png"));
-        fxmlElements.add(new FxmlElementWithPath(wk3,"dark_knight_outline2.png"));
-        fxmlElements.add(new FxmlElementWithPath(wk4,"dark_knight_outline3.png"));
+        fxmlElements.add(new FxmlElementWithPath(wk1,"knight_outline.png"));
+        fxmlElements.add(new FxmlElementWithPath(wk2,"knight_outline1.png"));
+        fxmlElements.add(new FxmlElementWithPath(wk3,"knight_outline2.png"));
+        fxmlElements.add(new FxmlElementWithPath(wk4,"knight_outline3.png"));
 
         //Dark Bishops
-        fxmlElements.add(new FxmlElementWithPath(db1,"dark_bishop_filled.png"));
-        fxmlElements.add(new FxmlElementWithPath(db2,"dark_bishop_filled1.png"));
-        fxmlElements.add(new FxmlElementWithPath(db3,"dark_bishop_filled2.png"));
-        fxmlElements.add(new FxmlElementWithPath(db4,"dark_bishop_filled3.png"));
+        fxmlElements.add(new FxmlElementWithPath(db1,"bishop_filled.png"));
+        fxmlElements.add(new FxmlElementWithPath(db2,"bishop_filled1.png"));
+        fxmlElements.add(new FxmlElementWithPath(db3,"bishop_filled2.png"));
+        fxmlElements.add(new FxmlElementWithPath(db4,"bishop_filled3.png"));
 
         //White Bishops
-        fxmlElements.add(new FxmlElementWithPath(wb1,"dark_bishop_outline.png"));
-        fxmlElements.add(new FxmlElementWithPath(wb2,"dark_bishop_outline1.png"));
-        fxmlElements.add(new FxmlElementWithPath(wb3,"dark_bishop_outline2.png"));
-        fxmlElements.add(new FxmlElementWithPath(wb4,"dark_bishop_outline3.png"));
+        fxmlElements.add(new FxmlElementWithPath(wb1,"bishop_outline.png"));
+        fxmlElements.add(new FxmlElementWithPath(wb2,"bishop_outline1.png"));
+        fxmlElements.add(new FxmlElementWithPath(wb3,"bishop_outline2.png"));
+        fxmlElements.add(new FxmlElementWithPath(wb4,"bishop_outline3.png"));
 
         //Rook
         fxmlElements.add(new FxmlElementWithPath(r1,"rook.png"));
