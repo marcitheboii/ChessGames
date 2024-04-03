@@ -10,12 +10,6 @@ import java.util.Objects;
 
 public class GameApplication extends Application {
 
-    /**
-     * Megnyitja a megadott fxml alapján az ablakot, majd a felhasználó imoutokat tovább adja a controllernek.
-     *
-     * @param stage melyik fxml-t szeretnénk kirjazolni
-     * @throws IOException kivételt dob ha null paramétert kapna
-     */
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/landingPage/ui.fxml")));
@@ -27,3 +21,5 @@ public class GameApplication extends Application {
         stage.show();
     }
 }
+
+

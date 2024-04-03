@@ -66,7 +66,12 @@ public abstract class ScoreBoardController extends GameController {
 
                 for (Object obj : scoreboard) {
                     if (obj instanceof JSONObject) {
-                        highScoreList.add(new rowData(((JSONObject) obj).getString("Time"), ((JSONObject) obj).getInt("Steps"), ((JSONObject) obj).getBoolean("Solved"), ((JSONObject) obj).getString("Date")));
+                        highScoreList.add(new rowData((
+                                (JSONObject) obj).getString("Time"),
+                                ((JSONObject) obj).getInt("Steps"),
+                                ((JSONObject) obj).getBoolean("Solved"),
+                                ((JSONObject) obj).getString("Date")
+                        ));
                     }
                 }
 

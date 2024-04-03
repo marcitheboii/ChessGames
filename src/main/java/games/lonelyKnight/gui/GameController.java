@@ -97,6 +97,7 @@ public class GameController extends games.GameController {
     }
 
     private void printBoard() {
+
         grid.getChildren().clear();
 
         colorChessBoard();

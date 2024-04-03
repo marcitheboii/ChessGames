@@ -16,7 +16,6 @@ import java.util.Objects;
 public class LandingPageController extends GameController {
     @FXML
     private HBox navBar;
-
     @FXML
     private ImageView lonelyKnightImage;
     @FXML
@@ -29,10 +28,8 @@ public class LandingPageController extends GameController {
     private ImageView bodyGuardImage;
     @FXML
     private ImageView tightGameImage;
-
     @FXML
     private ImageView settingsIcon;
-
     @FXML
     private ImageView icon;
 
